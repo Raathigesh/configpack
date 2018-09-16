@@ -18,7 +18,7 @@ module.exports = {
     hot: true,
     port: 9000
   },
-  devtool: "source-map",
+  devtool: "cheap-module-eval-source-map",
   module: {
     rules: [
       {
@@ -37,6 +37,14 @@ module.exports = {
             limit: 50000
           }
         }
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: "svg-react-loader"
+          }
+        ]
       }
     ]
   },

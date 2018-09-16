@@ -2,6 +2,7 @@ import React from "react";
 import styled, { css } from "react-emotion";
 import * as monaco from "monaco-editor";
 import code from "./initial-code";
+import { Highlight } from "./Container";
 
 const ContainerDiv = styled("div")``;
 
@@ -11,11 +12,17 @@ const editorCss = css`
 `;
 
 const highlight = css`
-  background: #a4c5e3;
+  background: orange;
 `;
 
-export default class Editor extends React.Component {
+interface Props {
+  code: string;
+  highlights?: Highlight[];
+}
+
+export default class Editor extends React.Component<Props> {
   editorRef: any;
+  editor: any;
 
   componentDidMount() {
     monaco.editor.defineTheme("myTheme", {
@@ -33,7 +40,7 @@ export default class Editor extends React.Component {
       }
     });
 
-    const editor = monaco.editor.create(this.editorRef, {
+    this.editor = monaco.editor.create(this.editorRef, {
       value: code,
       language: "javascript",
       minimap: {
@@ -43,7 +50,7 @@ export default class Editor extends React.Component {
 
     monaco.editor.setTheme("myTheme");
 
-    editor.deltaDecorations(
+    this.editor.deltaDecorations(
       [],
       [
         {
@@ -52,6 +59,23 @@ export default class Editor extends React.Component {
         }
       ]
     );
+  }
+
+  componentDidUpdate() {
+    this.editor.setValue(this.props.code);
+
+    if (this.props.highlights) {
+      const docorations = this.props.highlights.map(high => ({
+        range: new monaco.Range(
+          high.start.line,
+          high.start.column,
+          high.end.line,
+          high.end.column
+        ),
+        options: { inlineClassName: highlight }
+      }));
+      this.editor.deltaDecorations([], docorations);
+    }
   }
 
   render() {
