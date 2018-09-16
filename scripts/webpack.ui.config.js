@@ -7,7 +7,7 @@ module.exports = {
   entry: "./ui/index.tsx",
   mode: "development",
   output: {
-    path: path.resolve(__dirname, "../dist/ui"),
+    path: path.resolve(__dirname, "../dist"),
     filename: "ui.bundle.js"
   },
   resolve: {
