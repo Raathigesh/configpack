@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "react-emotion";
-import Details from "./Details";
+import Details from "./details";
 import { Transition, animated } from "react-spring";
 import BlockFrame from "../../primitives/block-frame";
 import ConfigObjectContext from "../../context";
