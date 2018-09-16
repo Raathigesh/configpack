@@ -1,11 +1,13 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
+const MinifyPlugin = require("babel-minify-webpack-plugin");
 const webpack = require("webpack");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const path = require("path");
 
-module.exports = {
+module.exports = env => ({
   entry: "./ui/index.tsx",
-  mode: "development",
+  mode: env.production ? "production" : "development",
   output: {
     path: path.resolve(__dirname, "../dist"),
     filename: "ui.bundle.js"
@@ -18,12 +20,13 @@ module.exports = {
     hot: true,
     port: 9000
   },
-  devtool: "cheap-module-eval-source-map",
+
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        loader: "awesome-typescript-loader"
+        test: /\.(js|jsx|ts|tsx)$/,
+        exclude: /(node_modules)/,
+        loader: "babel-loader"
       },
       {
         test: /\.css$/,
@@ -50,10 +53,19 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      title: "Config Pack",
       template: require("html-webpack-template"),
       appMountId: "root"
     }),
-    new MonacoWebpackPlugin(),
+    new MonacoWebpackPlugin({
+      languages: ["javascript", "json"],
+      features: []
+    }),
     new webpack.HotModuleReplacementPlugin()
+    /*    new MinifyPlugin({
+      evaluate: false,
+      mangle: false,
+      deadcode: false
+    }) */
   ]
-};
+});
