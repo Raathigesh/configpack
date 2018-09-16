@@ -14,7 +14,7 @@ module.exports = {
     extensions: [".ts", ".tsx", ".js", ".jsx"]
   },
   devServer: {
-    contentBase: path.resolve(__dirname, "../dist/ui"),
+    contentBase: path.resolve(__dirname, "../dist"),
     hot: true,
     port: 9000
   },
