@@ -25,9 +25,9 @@ export default class Details extends React.Component<Props, State> {
     entry: "./entry.js"
   };
 
-  setWebpackFileContent = (content: string) => {
+  componentDidMount(content: string) {
     this.props.setFileContent(this.filePath, content);
-  };
+  }
 
   render() {
     return (

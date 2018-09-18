@@ -48,15 +48,16 @@ export default class ConfigState extends Container<State> {
 
   setFileContent = (path: string, content: string) => {
     const formattedCode = this.prettifyCode(content);
-    const nextState = produce<State>((draft: State) => {
-      const fileToUpdate = draft.files.find(file => file.name === path);
-      if (!fileToUpdate) {
-        return draft;
-      }
-      fileToUpdate.content = formattedCode;
-    });
 
-    this.setState(nextState);
+    this.setState(
+      produce<State>((draft: State) => {
+        const fileToUpdate = draft.files.find(file => file.name === path);
+        if (!fileToUpdate) {
+          return draft;
+        }
+        fileToUpdate.content = formattedCode;
+      })
+    );
   };
 
   setHighlights = (highlights: { string: Highlight[] }) => {
@@ -69,5 +70,16 @@ export default class ConfigState extends Container<State> {
     this.setState({
       activeFile: filePath
     });
+  };
+
+  addFile = (name: string, content: string) => {
+    this.setState(
+      produce<State>((draft: State) => {
+        draft.files.push({
+          name,
+          content
+        });
+      })
+    );
   };
 }

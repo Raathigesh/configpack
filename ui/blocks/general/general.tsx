@@ -22,11 +22,8 @@ export default class General extends React.Component {
             return (
               <animated.div style={styles}>
                 <Subscribe to={[ConfigState]}>
-                  {({ state, setFileContent }: ConfigState) => (
-                    <Details
-                      files={state.files}
-                      setFileContent={setFileContent}
-                    />
+                  {({ state, addFile }: ConfigState) => (
+                    <Details files={state.files} setFileContent={addFile} />
                   )}
                 </Subscribe>
               </animated.div>
