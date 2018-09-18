@@ -4,6 +4,8 @@ import Details from "./details";
 import { Transition, animated } from "react-spring";
 import BlockFrame from "../../primitives/block-frame";
 import ConfigObjectContext from "../../context";
+import ConfigState from "../../state";
+import { Subscribe } from "unstated";
 const WebpackIcon = require("./webpack-icon.svg");
 
 export default class General extends React.Component {
@@ -19,11 +21,14 @@ export default class General extends React.Component {
           {(styles: any) => {
             return (
               <animated.div style={styles}>
-                <ConfigObjectContext.Consumer>
-                  {({ files, setFileContent, setHighlights }) => (
-                    <Details files={files} setFileContent={setFileContent} />
+                <Subscribe to={[ConfigState]}>
+                  {({ state, setFileContent }: ConfigState) => (
+                    <Details
+                      files={state.files}
+                      setFileContent={setFileContent}
+                    />
                   )}
-                </ConfigObjectContext.Consumer>
+                </Subscribe>
               </animated.div>
             );
           }}

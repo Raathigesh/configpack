@@ -62,7 +62,7 @@ export default class Editor extends React.Component<Props> {
   }
 
   componentDidUpdate() {
-    this.editor.setValue(this.props.code);
+    /*   this.editor.setValue(this.props.code);
 
     if (this.props.highlights) {
       const docorations = this.props.highlights.map(high => ({
@@ -75,7 +75,7 @@ export default class Editor extends React.Component<Props> {
         options: { inlineClassName: highlight }
       }));
       this.editor.deltaDecorations([], docorations);
-    }
+    } */
   }
 
   render() {

@@ -2492,6 +2492,10 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
+create-react-context@^0.1.5:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/create-react-context/-/create-react-context-0.1.6.tgz#0f425931d907741127acc6e31acb4f9015dd9fdc"
+
 create-react-context@^0.2.1:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/create-react-context/-/create-react-context-0.2.3.tgz#9ec140a6914a22ef04b8b09b7771de89567cb6f3"
@@ -3797,6 +3801,10 @@ ignore-walk@^3.0.1:
   resolved "https://registry.yarnpkg.com/ignore-walk/-/ignore-walk-3.0.1.tgz#a83e62e7d272ac0e3b551aaa82831a19b69f82f8"
   dependencies:
     minimatch "^3.0.4"
+
+immer@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-1.6.0.tgz#4e41801272d64bff12d4b58ada0276bb2f4ead81"
 
 import-lazy@^2.1.0:
   version "2.1.0"
@@ -6514,6 +6522,12 @@ unset-value@^1.0.0:
   dependencies:
     has-value "^0.3.1"
     isobject "^3.0.0"
+
+unstated@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/unstated/-/unstated-2.1.1.tgz#36b124dfb2e7a12d39d0bb9c46dfb6e51276e3a2"
+  dependencies:
+    create-react-context "^0.1.5"
 
 unzip-response@^2.0.1:
   version "2.0.1"

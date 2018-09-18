@@ -1,8 +1,8 @@
-## Config Pack
+## 🍬 Config Pack
 
-Config pack is a tool to generate webpack configuration via UI.
+Config pack is a UI based configuration generator for JavaScript projects.
 
-The idea is to provide UI blocks which adds different configuration options to the webpack configuration.
+The idea is to provide UI blocks which configures various tools for JavaScript projects.
 
 Each block will be developed independently and should compose together. Each block would manipulate the webpack config AST using [babel-standalone](https://babeljs.io/docs/en/next/babel-standalone.html) and pass it to the next block in the pipeline. Finally the config would be shown in the editor panel.
 
