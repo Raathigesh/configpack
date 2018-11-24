@@ -4,9 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "ui": "webpack-dev-server --env.development --config ./scripts/webpack.ui.config.js",
+    "app": "webpack-dev-server --env.development --config ./scripts/webpack.ui.config.js",
     "server": "ts-node ./server/index.ts",
-    "build-ui": "cross-env BABEL_ENV='production' NODE_OPTIONS=--max_old_space_size=8192 rimraf dist && webpack --env.production --config ./scripts/webpack.ui.config.js",
+    "build-app": "cross-env BABEL_ENV='production' NODE_OPTIONS=--max_old_space_size=8192 rimraf dist && webpack --env.production --config ./scripts/webpack.ui.config.js",
     "build-server": "tsc --project ./tsconfig.server.json",
     "prod": "npm run build-ui && npm run build-server",
     "debug": "nodemon"
