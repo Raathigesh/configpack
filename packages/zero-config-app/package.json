@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --env.development --config ./scripts/webpack.ui.config.js",
-    "build": "cross-env BABEL_ENV='production' NODE_OPTIONS=--max_old_space_size=8192 rimraf dist && webpack --env.production --config ./scripts/webpack.ui.config.js"
+    "start": "webpack-dev-server --env.development --config ./config/webpack.ui.config.js",
+    "build": "cross-env BABEL_ENV='production' NODE_OPTIONS=--max_old_space_size=8192 rimraf dist && webpack --env.production --config ./config/webpack.ui.config.js"
   },
   "devDependencies": {
     "@babel/core": "^7.0.1",
@@ -45,6 +45,7 @@
     "url-loader": "^1.1.1",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.5"
+    "webpack-dev-server": "^3.1.5",
+    "webpackbar": "^3.1.3"
   }
 }

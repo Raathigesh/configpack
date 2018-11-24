@@ -4,9 +4,10 @@ const MinifyPlugin = require("babel-minify-webpack-plugin");
 const webpack = require("webpack");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const path = require("path");
+const WebpackBar = require("webpackbar");
 
 module.exports = env => ({
-  entry: "./ui/index.tsx",
+  entry: "./src/index.tsx",
   mode: env.production ? "production" : "development",
   output: {
     path: path.resolve(__dirname, "../dist"),
@@ -61,11 +62,7 @@ module.exports = env => ({
       languages: ["javascript", "json"],
       features: []
     }),
-    new webpack.HotModuleReplacementPlugin()
-    /*    new MinifyPlugin({
-      evaluate: false,
-      mangle: false,
-      deadcode: false
-    }) */
+    new webpack.HotModuleReplacementPlugin(),
+    new WebpackBar()
   ]
 });

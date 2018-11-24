@@ -1,10 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { injectGlobal } from "styled-components";
-import { hot } from "react-hot-loader";
 import Container from "./Container";
 
-import "@blueprintjs/core/lib/css/blueprint.css";
 require("typeface-karla");
 
 injectGlobal`
@@ -33,5 +31,4 @@ body {
 }
 `;
 
-const HotContainer = hot(module)(Container);
-ReactDOM.render(<HotContainer />, document.getElementById("root"));
+ReactDOM.render(<Container />, document.getElementById("root"));
