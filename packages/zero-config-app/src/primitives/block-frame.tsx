@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styled from "react-emotion";
+import styled from "styled-components";
 import { Flex } from "reflexbox";
 import { Maximize } from "react-feather";
 import { Button } from "@blueprintjs/core";

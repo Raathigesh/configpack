@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styled from "react-emotion";
+import styled from "styled-components";
 const prettier = require("prettier/standalone");
 const parser = require("prettier/parser-babylon");
 import Editor from "./Editor";

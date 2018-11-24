@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { injectGlobal } from "emotion";
+import { injectGlobal } from "styled-components";
 import { hot } from "react-hot-loader";
 import Container from "./Container";
 

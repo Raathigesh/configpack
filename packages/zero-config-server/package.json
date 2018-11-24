@@ -1,0 +1,18 @@
+{
+  "name": "zero-config-server",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "server": "ts-node ./server/index.ts",
+    "build-server": "tsc --project ./tsconfig.server.json",
+    "debug": "nodemon"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.2",
+    "nodemon": "^1.18.3",
+    "prettier": "^1.14.2",
+    "cross-env": "^5.2.0",
+    "ts-node": "^7.0.1"
+  }
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import { Classes, Icon, ITreeNode, Tooltip, Tree } from "@blueprintjs/core";
-import styled from "react-emotion";
+import styled from "styled-components";
 import { TreeItem } from "./state";
 
 const Container = styled("div")`

@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex } from "reflexbox";
-import styled from "react-emotion";
+import styled from "styled-components";
 
 const Container = styled("div")`
   background-color: #5069f9;
