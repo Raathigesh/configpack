@@ -1,5 +1,4 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
 const MinifyPlugin = require("babel-minify-webpack-plugin");
 const webpack = require("webpack");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
@@ -7,11 +6,11 @@ const path = require("path");
 const WebpackBar = require("webpackbar");
 
 module.exports = env => ({
-  entry: "./src/index.tsx",
+  entry: "./src/index.ts",
   mode: env.production ? "production" : "development",
   output: {
     path: path.resolve(__dirname, "../dist"),
-    filename: "ui.bundle.js"
+    filename: "bundle.js"
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"]
@@ -58,10 +57,6 @@ module.exports = env => ({
       template: require("html-webpack-template"),
       appMountId: "root",
       inject: false
-    }),
-    new MonacoWebpackPlugin({
-      languages: ["javascript", "json"],
-      features: []
     }),
     new webpack.HotModuleReplacementPlugin(),
     new WebpackBar()

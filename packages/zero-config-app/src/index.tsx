@@ -1,34 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { injectGlobal } from "styled-components";
-import Container from "./Container";
+import App from "./app";
 
-require("typeface-karla");
+import "typeface-karla";
 
-injectGlobal`
-body {
-    margin: 0;
-    overflow: hidden;
-    font-family: 'Karla', sans-serif !important;
+ReactDOM.render(<App />, document.getElementById("root"));
+
+if ((module as any).hot) {
+  (module as any).hot.accept("./app", () => {
+    const NextApp = require("./app").default;
+    ReactDOM.render(<NextApp />, document.getElementById("root"));
+  });
 }
-
-.bp3-tree-node-caret {
-    margin-top: 10px;
-    color: #F71948 !important;
-}
-
-.bp3-tree-node-label {
-    padding-top: 4px;
-    color: white;
-}
-
-.bp3-tree-node-icon {
-    color: #d1d1d1 !important;
-}
-
-:focus {
-    outline: #d1d1d1 auto 2px;
-}
-`;
-
-ReactDOM.render(<Container />, document.getElementById("root"));

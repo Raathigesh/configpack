@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import * as monaco from "monaco-editor";
 import code from "./initial-code";
-import { Highlight } from "./Container";
+import { Highlight } from "./app";
 
 const ContainerDiv = styled("div")``;
 

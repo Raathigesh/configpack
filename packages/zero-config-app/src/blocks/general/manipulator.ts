@@ -1,5 +1,5 @@
 const Babel = require("@babel/standalone");
-import { Highlight } from "../../Container";
+import { Highlight } from "../../app";
 
 interface Options {
   entryPath: string;

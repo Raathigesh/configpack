@@ -1,6 +1,6 @@
 import React from "react";
 import code from "./initial-code";
-import { Highlight } from "./Container";
+import { Highlight } from "./app";
 
 const ConfigObjectContext = React.createContext({
   activeFile: "",
