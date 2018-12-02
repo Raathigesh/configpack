@@ -1,15 +1,15 @@
-const webpack = require("webpack");
-const path = require("path");
+// you can use this file to add your custom webpack plugins, loaders and anything you like.
+// This is just the basic way to add additional webpack configurations.
+// For more information refer the docs: https://storybook.js.org/configurations/custom-webpack-config
 
-module.exports = env => ({
-  entry: "./src/index.ts",
-  mode: env.production ? "production" : "development",
-  output: {
-    path: path.resolve(__dirname, "../dist"),
-    filename: "bundle.js",
-    library: "zeroConfigComponents",
-    libraryTarget: "umd"
-  },
+// IMPORTANT
+// When you add this file, we won't add the default configurations which is similar
+// to "React Create App". This only has babel loader to load JavaScript.
+
+module.exports = {
+  plugins: [
+    // your custom plugins
+  ],
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"]
   },
@@ -42,6 +42,5 @@ module.exports = env => ({
         ]
       }
     ]
-  },
-  plugins: []
-});
+  }
+};
