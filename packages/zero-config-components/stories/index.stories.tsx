@@ -16,14 +16,14 @@ storiesOf("Button", module).add("with text", () => (
     <BodyStyle />
     <Frame direction="column">
       <Section name="Entry" description="Entry point of your application">
-        <Text />
+        <Text value="entry" onChange={value => console.log(value)} />
       </Section>
       <Section name="Output" description="Configuration of output">
         <Label label="Path" description="Directory of the bundle">
-          <Text />
+          <Text value="entry" onChange={value => console.log(value)} />
         </Label>
         <Label label="File name" description="File name of the bundle">
-          <Text />
+          <Text value="entry" onChange={value => console.log(value)} />
         </Label>
       </Section>
       <Section name="Resolve" description="Extensions to resolve">
@@ -38,6 +38,7 @@ storiesOf("Button", module).add("with text", () => (
               value: "tsx"
             }
           ]}
+          onChange={option => console.log(option)}
         />
       </Section>
     </Frame>

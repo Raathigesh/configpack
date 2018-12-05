@@ -14,6 +14,18 @@ body {
 storiesOf("GeneralBlockComponent", module).add("with text", () => (
   <Fragment>
     <BodyStyle />
-    <GeneralBlockComponent />
+    <GeneralBlockComponent
+      state={{
+        entry: "",
+        output: {
+          path: "",
+          fileName: ""
+        },
+        resolve: [".js"]
+      }}
+      onChange={state => {
+        console.log(JSON.stringify(state));
+      }}
+    />
   </Fragment>
 ));

@@ -1,6 +1,18 @@
 import React from "react";
 import { Input } from "@smooth-ui/core-sc";
 
-export default function Text() {
-  return <Input control size="sm" />;
+interface Props {
+  value: string;
+  onChange: (value: string) => void;
+}
+
+export default function Text({ value, onChange }: Props) {
+  return (
+    <Input
+      control
+      size="sm"
+      value={value}
+      onChange={(e: any) => onChange(e.target.value)}
+    />
+  );
 }
