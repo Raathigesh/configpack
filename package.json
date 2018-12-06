@@ -1,5 +1,6 @@
 {
   "devDependencies": {
-     "lerna": "^3.4.0"
+    "@types/node": "^10.12.12",
+    "lerna": "^3.4.0"
   }
 }
