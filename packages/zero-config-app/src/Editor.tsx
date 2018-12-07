@@ -1,23 +1,17 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import * as monaco from "monaco-editor";
-import code from "./initial-code";
-import { Highlight } from "./app";
 
 const ContainerDiv = styled("div")``;
 
-const editorCss = css`
+const EditorContainer = styled.div`
   height: calc(100vh - 0px);
   width: 600px;
 `;
 
-const highlight = css`
-  background: orange;
-`;
-
 interface Props {
   code: string;
-  highlights?: Highlight[];
+  highlights?: any[];
 }
 
 export default class Editor extends React.Component<Props> {
@@ -41,7 +35,7 @@ export default class Editor extends React.Component<Props> {
     });
 
     this.editor = monaco.editor.create(this.editorRef, {
-      value: code,
+      value: "",
       language: "javascript",
       minimap: {
         enabled: false
@@ -50,7 +44,7 @@ export default class Editor extends React.Component<Props> {
 
     monaco.editor.setTheme("myTheme");
 
-    this.editor.deltaDecorations(
+    /*  this.editor.deltaDecorations(
       [],
       [
         {
@@ -58,7 +52,7 @@ export default class Editor extends React.Component<Props> {
           options: { inlineClassName: highlight }
         }
       ]
-    );
+    ); */
   }
 
   componentDidUpdate() {
@@ -81,7 +75,7 @@ export default class Editor extends React.Component<Props> {
   render() {
     return (
       <ContainerDiv>
-        <div className={editorCss} ref={(e: any) => (this.editorRef = e)} />
+        <EditorContainer ref={(e: any) => (this.editorRef = e)} />
       </ContainerDiv>
     );
   }

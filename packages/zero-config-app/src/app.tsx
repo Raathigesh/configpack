@@ -4,9 +4,8 @@ import SideBar from "./side-bar";
 import defaultTheme, { ThemeContext } from "./theme";
 const prettier = require("prettier/standalone");
 const parser = require("prettier/parser-babylon");
-import Editor from "./Editor";
+import Editor from "./editor";
 import Guide from "./Guide";
-import initialCode from "./initial-code";
 import ConfigObjectContext from "./context";
 import Files from "./files";
 import Header from "./header";
@@ -36,6 +35,7 @@ export default class Container extends Component<{}> {
         <ThemeContext.Provider value={defaultTheme}>
           <ContainerDiv>
             <SideBar />
+            <Editor />
           </ContainerDiv>
         </ThemeContext.Provider>
       </React.Fragment>
