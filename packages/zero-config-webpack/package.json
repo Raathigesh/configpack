@@ -1,12 +1,14 @@
 {
   "name": "zero-config-webpack",
   "version": "0.1.0",
-  "main": "./src/index.ts",
+  "main": "dist/bundle.js",
+  "types": "dist/src/index.d.ts",
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --env.development --config ./config/webpack.ui.config.js",
-    "build": "cross-env BABEL_ENV='production' NODE_OPTIONS=--max_old_space_size=8192 rimraf dist && webpack --env.production --config ./config/webpack.ui.config.js",
-    "sb": "start-storybook -p 6006"
+    "build": "cross-env BABEL_ENV='production' rimraf dist && webpack --env.production --config ./config/webpack.ui.config.js && npm run types",
+    "sb": "start-storybook -p 6006",
+    "types": "tsc"
   },
   "devDependencies": {
     "@babel/core": "^7.0.1",
@@ -53,5 +55,8 @@
     "webpack-dev-server": "^3.1.5",
     "webpackbar": "^3.1.3",
     "zero-config-components": "^0.1.0"
+  },
+  "dependencies": {
+    "typescript": "^3.2.2"
   }
 }
