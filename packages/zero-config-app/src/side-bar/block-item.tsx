@@ -12,7 +12,12 @@ const Container = styled.div<{ backgroundColor: string }>`
   background-color: ${props => props.backgroundColor};
 `;
 
-export default function BlockItem() {
+interface Props {
+  name: string;
+  description: string;
+}
+
+export default function BlockItem({ name, description }: Props) {
   const {
     sidebar: {
       blockItem: { backgroundColor }
@@ -21,8 +26,8 @@ export default function BlockItem() {
 
   return (
     <Container backgroundColor={backgroundColor}>
-      <div>Babel 7 for Webpack</div>
-      <div>Adds babel for webpack</div>
+      <div>{name}</div>
+      <div>{description}</div>
     </Container>
   );
 }

@@ -5,12 +5,9 @@ import defaultTheme, { ThemeContext } from "./theme";
 const prettier = require("prettier/standalone");
 const parser = require("prettier/parser-babylon");
 import Editor from "./editor";
-import Guide from "./Guide";
-import ConfigObjectContext from "./context";
-import Files from "./files";
-import Header from "./header";
-import { Flex } from "reflexbox";
-import { produce } from "immer";
+import FileExplorer from "./file-explorer";
+import Panel from "./panel";
+
 const GlobalStyle = createGlobalStyle`
 body {
     margin: 0;
@@ -24,18 +21,57 @@ const ContainerDiv = styled("div")`
   flex-direction: row;
 `;
 
-export default class Container extends Component<{}> {
-  render() {
-    import("zero-config-webpack").then(module => {
-      console.log(module);
+export interface ExtensionPack {
+  displayName: string;
+  description: string;
+  blocks: {
+    component: any;
+    name: string;
+    description: string;
+  }[];
+  onFinalize(options: any): any;
+}
+
+interface State {
+  extensionPacks: ExtensionPack[];
+}
+
+export default class Container extends Component<{}, State> {
+  state = {
+    extensionPacks: []
+  };
+
+  componentDidMount() {
+    import("zero-config-webpack").then((pack: any) => {
+      console.log(pack);
+      this.setState({
+        extensionPacks: [pack.default]
+      });
     });
+  }
+
+  render() {
+    const { extensionPacks } = this.state;
     return (
       <React.Fragment>
         <GlobalStyle />
         <ThemeContext.Provider value={defaultTheme}>
           <ContainerDiv>
-            <SideBar />
+            <SideBar packs={extensionPacks} />
+            <Panel packs={extensionPacks} />
             <Editor />
+            <FileExplorer
+              files={[
+                {
+                  name: "webpack.config.js",
+                  path: ""
+                },
+                {
+                  name: "package.json",
+                  path: ""
+                }
+              ]}
+            />
           </ContainerDiv>
         </ThemeContext.Provider>
       </React.Fragment>
