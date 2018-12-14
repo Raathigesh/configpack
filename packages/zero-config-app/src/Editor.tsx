@@ -1,6 +1,9 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import * as monaco from "monaco-editor";
+const prettier = require("prettier/standalone");
+const parser = require("prettier/parser-babylon");
+import MonacoEditor from "react-monaco-editor";
 
 const ContainerDiv = styled("div")``;
 
@@ -34,7 +37,7 @@ export default class Editor extends React.Component<Props> {
       }
     });
 
-    this.editor = monaco.editor.create(this.editorRef, {
+    /*   this.editor = monaco.editor.create(this.editorRef, {
       value: "",
       language: "javascript",
       minimap: {
@@ -42,7 +45,7 @@ export default class Editor extends React.Component<Props> {
       }
     });
 
-    monaco.editor.setTheme("myTheme");
+    monaco.editor.setTheme("myTheme"); */
 
     /*  this.editor.deltaDecorations(
       [],
@@ -75,7 +78,19 @@ export default class Editor extends React.Component<Props> {
   render() {
     return (
       <ContainerDiv>
-        <EditorContainer ref={(e: any) => (this.editorRef = e)} />
+        {/*  <EditorContainer ref={(e: any) => (this.editorRef = e)} /> */}
+        <MonacoEditor
+          width="800"
+          height="600"
+          language="javascript"
+          theme="vs-dark"
+          value={this.props.code}
+          options={{
+            selectOnLineNumbers: true
+          }}
+          onChange={() => {}}
+          editorDidMount={() => {}}
+        />
       </ContainerDiv>
     );
   }

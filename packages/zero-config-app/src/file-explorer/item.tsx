@@ -15,14 +15,16 @@ const Label = styled.div`
 
 interface Props {
   file: File;
+  onClick: (name: string) => void;
 }
 
-export default function FileItem({ file }: Props) {
+export default function FileItem({ file, onClick }: Props) {
   return (
     <Container>
       <FileIcon size="12" />
-      <Label>{file.name}</Label>
-      {file.children && file.children.map(child => <FileItem file={child} />)}
+      <Label onClick={() => onClick(file.name)}>{file.name}</Label>
+      {file.children &&
+        file.children.map(child => <FileItem file={child} onClick={onClick} />)}
     </Container>
   );
 }

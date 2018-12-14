@@ -16,6 +16,7 @@ module.exports = env => ({
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"]
   },
+  devtool: "source-map",
   devServer: {
     contentBase: path.resolve(__dirname, "../dist"),
     hot: true,

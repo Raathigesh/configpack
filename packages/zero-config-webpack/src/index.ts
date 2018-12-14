@@ -11,10 +11,13 @@ export interface WebpackConfig {
 }
 
 const WebpackConfigPack = {
+  id: "extensions.webpack",
   displayName: "Webpack config pack",
   description: "Webpack configuration block",
   blocks: [
     {
+      name: "General configuration",
+      description: "Required configuration",
       // would be provided with props
       // Props would be
       // - onChangeHandler() will trigger whenever the state changes

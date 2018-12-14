@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ExtensionPack } from "../app";
+import { EnabledBlock } from "../app";
 
 const Container = styled.div`
   display: flex;
@@ -9,25 +9,37 @@ const Container = styled.div`
 `;
 
 interface Props {
-  packs: ExtensionPack[];
+  blocks: EnabledBlock[];
+  extensionState: { [extensionKeyl: string]: any };
+  onExtentionStateChange: (extensionKey: string, state: any) => void;
 }
 
-export default function Panel({ packs }: Props) {
+export default function Panel({
+  blocks,
+  extensionState,
+  onExtentionStateChange
+}: Props) {
   return (
     <Container>
-      {packs.map(pack => {
-        return pack.blocks.map(block => (
-          <block.component
-            state={{
-              entry: "",
-              output: {
-                path: "",
-                fileName: ""
-              },
-              resolve: [".js"]
+      {blocks.map(({ component: Component, packKey }) => {
+        const packState = extensionState[packKey];
+        return (
+          <Component
+            state={
+              packState || {
+                entry: "",
+                output: {
+                  path: "",
+                  fileName: ""
+                },
+                resolve: [".js"]
+              }
+            }
+            onChange={(nextState: any) => {
+              onExtentionStateChange(packKey, nextState);
             }}
           />
-        ));
+        );
       })}
     </Container>
   );

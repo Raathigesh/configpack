@@ -11,19 +11,20 @@ const Container = styled.div`
 
 export interface File {
   name: string;
-  path: string;
+  content: string;
   children?: File[];
 }
 
 interface Props {
   files: File[];
+  onClick: (name: string) => void;
 }
 
-export default function FileExplorer({ files }: Props) {
+export default function FileExplorer({ files, onClick }: Props) {
   return (
     <Container>
       {files.map(file => (
-        <FileItem file={file} />
+        <FileItem file={file} onClick={onClick} />
       ))}
     </Container>
   );
