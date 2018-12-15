@@ -76,17 +76,25 @@ export default class Editor extends React.Component<Props> {
   }
 
   render() {
+    const prettyCode = prettier.format(this.props.code, {
+      parser: "babylon",
+      plugins: [parser]
+    });
+
     return (
       <ContainerDiv>
         {/*  <EditorContainer ref={(e: any) => (this.editorRef = e)} /> */}
         <MonacoEditor
-          width="800"
+          width="500"
           height="600"
           language="javascript"
           theme="vs-dark"
-          value={this.props.code}
+          value={prettyCode}
           options={{
-            selectOnLineNumbers: true
+            selectOnLineNumbers: true,
+            minimap: {
+              enabled: false
+            }
           }}
           onChange={() => {}}
           editorDidMount={() => {}}

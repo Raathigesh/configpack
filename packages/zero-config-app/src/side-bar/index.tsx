@@ -6,7 +6,7 @@ import { ExtensionPack } from "../app";
 
 const Container = styled.div<{ backgroundColor: string }>`
   display: flex;
-  min-width: 300px;
+  min-width: 200px;
   height: 100vh;
   padding: 10px;
   background-color: ${props => props.backgroundColor};
@@ -24,7 +24,7 @@ export default function SideBar({ packs }: Props) {
     <Container backgroundColor={backgroundColor}>
       {packs.map(pack =>
         pack.blocks.map(({ name, description }) => (
-          <BlockItem name={name} description={description} />
+          <BlockItem key={name} name={name} description={description} />
         ))
       )}
     </Container>

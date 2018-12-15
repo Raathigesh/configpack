@@ -7,23 +7,16 @@ import "inter-ui";
 
 const BodyStyle = createGlobalStyle`
 body {
-  font-family: 'Inter UI var alt', sans-serif;
+  font-family: 'Inter UI', sans-serif;
 }
 `;
 
 function Example() {
   const Component = Blocks.blocks[0].component;
   const onFinalize = Blocks.onFinalize;
-  const [state, setState] = useState({
-    entry: "",
-    output: {
-      path: "",
-      fileName: ""
-    },
-    resolve: [".js"]
-  });
+  const [state, setState] = useState(Blocks.getInitialState());
 
-  console.log(onFinalize(state));
+  Object.entries(onFinalize(state)).map(([, value]) => console.log(value));
 
   return (
     <Fragment>

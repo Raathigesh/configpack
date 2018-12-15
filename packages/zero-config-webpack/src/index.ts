@@ -25,15 +25,25 @@ const WebpackConfigPack = {
       component: GeneralBlockComponent
     }
   ],
+  getInitialState() {
+    return {
+      entry: "",
+      output: {
+        path: "",
+        fileName: ""
+      },
+      resolve: [".js"]
+    };
+  },
   // builds the code by getting the state
   // state would be an object with keys as block name and value as the state
   onFinalize({ entry, output: { path, fileName }, resolve }: WebpackConfig) {
     const webpackConfigCode = `
       module.exports = {
-        entry: ${entry},
+        entry: '${entry}',
         output: {
-          path: ${path},
-          fileName: ${fileName}
+          path: '${path}',
+          fileName: '${fileName}'
         },
         resolve: [${resolve.join(",")}]
       };

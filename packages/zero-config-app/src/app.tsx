@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import SideBar from "./side-bar";
 import defaultTheme, { ThemeContext } from "./theme";
@@ -6,6 +6,7 @@ import Editor from "./editor";
 import FileExplorer from "./file-explorer";
 import Panel from "./panel";
 import AddBlocksDialog from "./add-blocks-dialog";
+import { app } from "./store/app";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -15,133 +16,59 @@ body {
 }
 `;
 
-const ContainerDiv = styled("div")`
+const ContainerDiv = styled.div`
   display: flex;
   flex-direction: row;
 `;
 
-export interface BlockItem {
-  component: any;
-  name: string;
-  description: string;
-}
+const mapResultsToFiles = (results: { [filepath: string]: string }) => {
+  return Object.entries(results).map(([key, value]) => {
+    return {
+      name: key,
+      content: value
+    };
+  });
+};
 
-export interface ExtensionPack {
-  id: string;
-  displayName: string;
-  description: string;
-  blocks: BlockItem[];
-  onFinalize(options: any): any;
-}
+export default function Container() {
+  const {
+    getFiles,
+    extensions,
+    addExtenion,
+    addBlock,
+    enabledBlocks,
+    extensionsState,
+    updateExtensionState,
+    activeFile,
+    setActiveFile
+  } = app();
 
-export interface EnabledBlock extends BlockItem {
-  packKey: string;
-}
-
-interface State {
-  extensionPacks: ExtensionPack[];
-  enabledBlocks: EnabledBlock[];
-  extensionState: { [extensionKey: string]: any };
-  files: { [filePath: string]: string };
-  activeFile: string;
-}
-
-export default class Container extends Component<{}, State> {
-  state: State = {
-    extensionPacks: [],
-    enabledBlocks: [],
-    extensionState: {},
-    activeFile: ""
-  };
-
-  componentDidMount() {
+  useEffect(() => {
     import("zero-config-webpack").then((pack: any) => {
-      console.log(pack);
-      this.setState({
-        extensionPacks: [pack.default],
-        enabledBlocks: [
-          {
-            ...pack.default.blocks[0],
-            packKey: pack.default.id
-          }
-        ]
-      });
+      addExtenion(pack.default);
+      addBlock(pack.default.id, pack.default.blocks[0]);
     });
-  }
+  }, []);
 
-  onExtentionStateChange = (extensionKey: string, state: any) => {
-    this.setState({
-      extensionState: {
-        ...this.state.extensionState,
-        [extensionKey]: state
-      }
-    });
-  };
+  const files = getFiles();
+  const mappedFiles = mapResultsToFiles(files);
+  return (
+    <React.Fragment>
+      <GlobalStyle />
+      <ThemeContext.Provider value={defaultTheme}>
+        <ContainerDiv>
+          {false && <AddBlocksDialog extensionPacks={extensions} />}
+          <SideBar packs={extensions} />
+          <Panel
+            blocks={enabledBlocks}
+            extensionState={extensionsState}
+            onExtentionStateChange={updateExtensionState}
+          />
 
-  getExtentionPackByKey = (key: string) =>
-    this.state.extensionPacks.find(pack => pack.id === key);
-
-  getFiles = () => {
-    return this.state.enabledBlocks.reduce((acc, block: EnabledBlock) => {
-      const extenionPack = this.getExtentionPackByKey(block.packKey);
-      let result = {};
-
-      if (extenionPack && this.state.extensionState[block.packKey]) {
-        result = extenionPack.onFinalize(
-          this.state.extensionState[block.packKey]
-        );
-      }
-
-      return {
-        ...acc,
-        ...result
-      };
-    }, {});
-  };
-
-  mapResultsToFiles = (results: { [filepath: string]: string }) => {
-    return Object.entries(results).map(([key, value]) => {
-      return {
-        name: key,
-        content: value
-      };
-    });
-  };
-
-  render() {
-    const {
-      extensionPacks,
-      enabledBlocks,
-      extensionState,
-      activeFile
-    } = this.state;
-    const files = this.getFiles();
-    const mappedFiles = this.mapResultsToFiles(files);
-    return (
-      <React.Fragment>
-        <GlobalStyle />
-        <ThemeContext.Provider value={defaultTheme}>
-          <ContainerDiv>
-            {false && <AddBlocksDialog extensionPacks={extensionPacks} />}
-            <SideBar packs={extensionPacks} />
-            <Panel
-              blocks={enabledBlocks}
-              extensionState={extensionState}
-              onExtentionStateChange={this.onExtentionStateChange}
-            />
-
-            <Editor code={files[activeFile] || ""} />
-            <FileExplorer
-              files={mappedFiles}
-              onClick={(fileName: string) => {
-                this.setState({
-                  activeFile: fileName
-                });
-              }}
-            />
-          </ContainerDiv>
-        </ThemeContext.Provider>
-      </React.Fragment>
-    );
-  }
+          <Editor code={files[activeFile] || ""} />
+          <FileExplorer files={mappedFiles} onClick={setActiveFile} />
+        </ContainerDiv>
+      </ThemeContext.Provider>
+    </React.Fragment>
+  );
 }

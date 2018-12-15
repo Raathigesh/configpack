@@ -47,6 +47,7 @@
     "typeface-karla": "^0.0.54",
     "uglifyjs-webpack-plugin": "^2.0.0",
     "url-loader": "^1.1.1",
+    "use-immer": "^0.0.5",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.5",

@@ -39,3 +39,9 @@ declare module "reflexbox" {
   export class Flex extends React.Component<BoxProps> {}
   export class Box extends React.Component<BoxProps> {}
 }
+
+declare module "use-immer" {
+  export function useImmer(state: any) {
+    return [() => {}, state];
+  }
+}
