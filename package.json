@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "ci": "lerna bootstrap && cd ./packages/zero-config-app && yarn build"
+  },
   "devDependencies": {
     "@types/node": "^10.12.12",
     "lerna": "^3.4.0"
