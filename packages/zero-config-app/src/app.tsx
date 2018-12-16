@@ -1,34 +1,31 @@
-import React, { Component, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import SideBar from "./side-bar";
 import defaultTheme, { ThemeContext } from "./theme";
-import Editor from "./editor";
-import FileExplorer from "./file-explorer";
+import EditorWithFileExplorer from "./editor";
 import Panel from "./panel";
 import AddBlocksDialog from "./add-blocks-dialog";
 import { app } from "./store/app";
+import Header from "./header";
 
 const GlobalStyle = createGlobalStyle`
 body {
     margin: 0;
     overflow: hidden;
-    font-family: 'Karla', sans-serif !important;
+    font-family: system-ui,BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
 }
 `;
 
-const ContainerDiv = styled.div`
+const MainContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 `;
 
-const mapResultsToFiles = (results: { [filepath: string]: string }) => {
-  return Object.entries(results).map(([key, value]) => {
-    return {
-      name: key,
-      content: value
-    };
-  });
-};
+const ContentContainer = styled.div<{ background: string }>`
+  display: flex;
+  flex-direction: row;
+  background-color: ${props => props.background};
+`;
 
 export default function Container() {
   const {
@@ -51,23 +48,32 @@ export default function Container() {
   }, []);
 
   const files = getFiles();
-  const mappedFiles = mapResultsToFiles(files);
+
+  const {
+    background: { tertiary }
+  } = useContext(ThemeContext);
+
   return (
     <React.Fragment>
       <GlobalStyle />
       <ThemeContext.Provider value={defaultTheme}>
-        <ContainerDiv>
-          {false && <AddBlocksDialog extensionPacks={extensions} />}
-          <SideBar packs={extensions} />
-          <Panel
-            blocks={enabledBlocks}
-            extensionState={extensionsState}
-            onExtentionStateChange={updateExtensionState}
-          />
-
-          <Editor code={files[activeFile] || ""} />
-          <FileExplorer files={mappedFiles} onClick={setActiveFile} />
-        </ContainerDiv>
+        <MainContainer>
+          <Header />
+          <ContentContainer background={tertiary}>
+            {false && <AddBlocksDialog extensionPacks={extensions} />}
+            <SideBar packs={extensions} />
+            <Panel
+              blocks={enabledBlocks}
+              extensionState={extensionsState}
+              onExtentionStateChange={updateExtensionState}
+            />
+            <EditorWithFileExplorer
+              files={files}
+              activeFile={activeFile}
+              setActiveFile={setActiveFile}
+            />
+          </ContentContainer>
+        </MainContainer>
       </ThemeContext.Provider>
     </React.Fragment>
   );

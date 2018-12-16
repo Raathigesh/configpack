@@ -11,6 +11,7 @@ const Container = styled.div`
 const Label = styled.div`
   margin-left: 5px;
   font-size: 13px;
+  cursor: pointer;
 `;
 
 interface Props {

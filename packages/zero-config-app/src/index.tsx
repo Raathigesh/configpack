@@ -2,8 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./app";
 
-import "typeface-karla";
-
 ReactDOM.render(<App />, document.getElementById("root"));
 
 if ((module as any).hot) {

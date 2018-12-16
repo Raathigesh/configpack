@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import BlockItem from "./block-item";
 import { ThemeContext } from "../theme";
-import { ExtensionPack } from "../app";
+import { ExtensionPack } from "../types";
 
 const Container = styled.div<{ backgroundColor: string }>`
   display: flex;
@@ -17,11 +17,9 @@ interface Props {
 }
 
 export default function SideBar({ packs }: Props) {
-  const {
-    sidebar: { backgroundColor }
-  } = useContext(ThemeContext);
+  const {} = useContext(ThemeContext);
   return (
-    <Container backgroundColor={backgroundColor}>
+    <Container backgroundColor={""}>
       {packs.map(pack =>
         pack.blocks.map(({ name, description }) => (
           <BlockItem key={name} name={name} description={description} />

@@ -45,7 +45,7 @@ const WebpackConfigPack = {
           path: '${path}',
           fileName: '${fileName}'
         },
-        resolve: [${resolve.join(",")}]
+        resolve: [${resolve.map(item => `'${item}'`).join(",")}]
       };
     `;
 

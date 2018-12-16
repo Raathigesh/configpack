@@ -1,23 +1,26 @@
-import React from "react";
-import { Flex } from "reflexbox";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { ThemeContext } from "./theme";
 
-const Container = styled("div")`
-  background-color: #5069f9;
+const Container = styled.div<{ background: string; padding: number }>`
+  background-color: ${props => props.background};
+  padding: ${props => `${props.padding}px`};
 `;
 
-const Logo = styled("div")`
+const Logo = styled.div`
   font-size: 20px;
   color: white;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 3px;
   font-weight: 400;
 `;
 
 export default function Header() {
+  const {
+    background: { primary },
+    padding: { medium }
+  } = useContext(ThemeContext);
+
   return (
-    <Container>
+    <Container background={primary} padding={medium}>
       <Logo>Configpack</Logo>
     </Container>
   );

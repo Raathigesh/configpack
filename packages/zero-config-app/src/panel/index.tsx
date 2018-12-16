@@ -4,8 +4,12 @@ import { EnabledBlock } from "../types";
 
 const Container = styled.div`
   display: flex;
-  flex-grow: 1;
-  padding: 10px;
+`;
+
+const InnerContainer = styled.div`
+  box-shadow: 0px 0px 20px -8px rgba(163, 163, 163, 1);
+  padding: 15px;
+  background: white;
 `;
 
 interface Props {
@@ -21,18 +25,20 @@ export default function Panel({
 }: Props) {
   return (
     <Container>
-      {blocks.map(({ component: Component, extensionKey, name }) => {
-        const packState = extensionState[extensionKey];
-        return (
-          <Component
-            key={name}
-            state={packState}
-            onChange={(nextState: any) => {
-              onExtentionStateChange(extensionKey, nextState);
-            }}
-          />
-        );
-      })}
+      <InnerContainer>
+        {blocks.map(({ component: Component, extensionKey, name }) => {
+          const packState = extensionState[extensionKey];
+          return (
+            <Component
+              key={name}
+              state={packState}
+              onChange={(nextState: any) => {
+                onExtentionStateChange(extensionKey, nextState);
+              }}
+            />
+          );
+        })}
+      </InnerContainer>
     </Container>
   );
 }

@@ -59,10 +59,10 @@ module.exports = env => ({
       template: require("html-webpack-template"),
       appMountId: "root",
       inject: false
+      //  scripts: ["./worker.js"]
     }),
     new MonacoWebpackPlugin({
-      languages: ["javascript", "json"],
-      features: []
+      languages: ["json", "javascript", "typescript"]
     }),
     new webpack.HotModuleReplacementPlugin(),
     new WebpackBar()

@@ -7,6 +7,7 @@ const Container = styled.div`
   flex-direction: column;
   padding: 15px;
   min-width: 150px;
+  flex-grow: 0;
 `;
 
 export interface File {

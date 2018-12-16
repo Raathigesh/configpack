@@ -1,11 +1,14 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import * as monaco from "monaco-editor";
 const prettier = require("prettier/standalone");
 const parser = require("prettier/parser-babylon");
+// import * as mc from "monaco-editor";
 import MonacoEditor from "react-monaco-editor";
 
-const ContainerDiv = styled("div")``;
+const ContainerDiv = styled.div`
+  display: flex;
+  flex-grow: 1;
+`;
 
 const EditorContainer = styled.div`
   height: calc(100vh - 0px);
@@ -22,7 +25,7 @@ export default class Editor extends React.Component<Props> {
   editor: any;
 
   componentDidMount() {
-    monaco.editor.defineTheme("myTheme", {
+    /*  monaco.editor.defineTheme("myTheme", {
       base: "vs",
       inherit: true,
       rules: [{ background: "EDF9FA", token: "" }],
@@ -35,8 +38,7 @@ export default class Editor extends React.Component<Props> {
         "editor.selectionBackground": "#88000030",
         "editor.inactiveSelectionBackground": "#88000015"
       }
-    });
-
+    }); */
     /*   this.editor = monaco.editor.create(this.editorRef, {
       value: "",
       language: "javascript",
@@ -46,7 +48,6 @@ export default class Editor extends React.Component<Props> {
     });
 
     monaco.editor.setTheme("myTheme"); */
-
     /*  this.editor.deltaDecorations(
       [],
       [
@@ -75,6 +76,24 @@ export default class Editor extends React.Component<Props> {
     } */
   }
 
+  editorDidMount(editor: any, monaco: any) {
+    monaco.editor.defineTheme("myTheme", {
+      base: "vs",
+      inherit: true,
+      rules: [{ background: "EDF9FA", token: "" }],
+      colors: {
+        "editor.foreground": "#000000",
+        "editor.background": "#F2F6FA",
+        "editorCursor.foreground": "#8B0000",
+        "editor.lineHighlightBackground": "#0000FF20",
+        "editorLineNumber.foreground": "#008800",
+        "editor.selectionBackground": "#88000030",
+        "editor.inactiveSelectionBackground": "#88000015"
+      }
+    });
+    monaco.editor.setTheme("myTheme");
+  }
+
   render() {
     const prettyCode = prettier.format(this.props.code, {
       parser: "babylon",
@@ -82,13 +101,11 @@ export default class Editor extends React.Component<Props> {
     });
 
     return (
-      <ContainerDiv>
-        {/*  <EditorContainer ref={(e: any) => (this.editorRef = e)} /> */}
+      <ContainerDiv ref={ele => (this.editor = ele)}>
         <MonacoEditor
-          width="500"
-          height="600"
+          width={this.editor && this.editor.clientHeight}
           language="javascript"
-          theme="vs-dark"
+          theme="myTheme"
           value={prettyCode}
           options={{
             selectOnLineNumbers: true,
@@ -97,7 +114,7 @@ export default class Editor extends React.Component<Props> {
             }
           }}
           onChange={() => {}}
-          editorDidMount={() => {}}
+          editorDidMount={this.editorDidMount}
         />
       </ContainerDiv>
     );
