@@ -5,8 +5,8 @@ import FileItem from "./item";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 15px;
-  min-width: 150px;
+  padding-left: 15px;
+  padding-right: 15px;
   flex-grow: 0;
 `;
 

@@ -103,7 +103,7 @@ export default class Editor extends React.Component<Props> {
     return (
       <ContainerDiv ref={ele => (this.editor = ele)}>
         <MonacoEditor
-          width={this.editor && this.editor.clientHeight}
+          width={this.editor && this.editor.clientWidth}
           language="javascript"
           theme="myTheme"
           value={prettyCode}

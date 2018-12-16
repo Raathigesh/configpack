@@ -3,9 +3,12 @@ import styled from "styled-components";
 import Editor from "./editor";
 import FileExplorer from "./file-explorer";
 
+// box-shadow: 0px 0px 20px -8px rgba(163, 163, 163, 1);
 const Container = styled.div`
   display: flex;
   flex-grow: 1;
+  padding: 15px;
+  background: white;
 `;
 
 interface Props {

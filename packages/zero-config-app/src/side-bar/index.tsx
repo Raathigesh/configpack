@@ -6,8 +6,8 @@ import { ExtensionPack } from "../types";
 
 const Container = styled.div<{ backgroundColor: string }>`
   display: flex;
+  align-items: flex-start;
   min-width: 200px;
-  height: 100vh;
   padding: 10px;
   background-color: ${props => props.backgroundColor};
 `;

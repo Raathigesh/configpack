@@ -15,6 +15,11 @@ export interface Theme {
     bold: number;
     normal: number;
   };
+  fontSize: {
+    small: number;
+    medium: number;
+    larget: number;
+  };
   padding: {
     mini: number;
     medium: number;
@@ -29,13 +34,18 @@ const DefaultTheme: Theme = {
     tertiary: "#F5F8FB"
   },
   color: {
-    primary: "",
+    primary: "#F5F8FB",
     secondary: "",
     tertiary: ""
   },
   fontWeight: {
     bold: 700,
     normal: 400
+  },
+  fontSize: {
+    small: 12,
+    medium: 15,
+    larget: 18
   },
   padding: {
     mini: 5,

@@ -24,6 +24,7 @@ const MainContainer = styled.div`
 const ContentContainer = styled.div<{ background: string }>`
   display: flex;
   flex-direction: row;
+  height: 100vh;
   background-color: ${props => props.background};
 `;
 
