@@ -8,7 +8,6 @@ const Container = styled.div`
   display: flex;
   flex-grow: 1;
   padding: 15px;
-  background: white;
 `;
 
 interface Props {

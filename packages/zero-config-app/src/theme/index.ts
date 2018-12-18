@@ -29,7 +29,7 @@ export interface Theme {
 
 const DefaultTheme: Theme = {
   background: {
-    primary: "#7057D2",
+    primary: "#0074EE",
     secondary: "#FFFFFF",
     tertiary: "#F5F8FB"
   },
