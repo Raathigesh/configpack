@@ -4,12 +4,11 @@ import { EnabledBlock } from "../types";
 
 const Container = styled.div`
   display: flex;
+  background-color: #f8f8f8;
 `;
 
 const InnerContainer = styled.div`
-  box-shadow: 0px 0px 20px -8px rgba(163, 163, 163, 1);
   padding: 15px;
-  background: white;
 `;
 
 interface Props {

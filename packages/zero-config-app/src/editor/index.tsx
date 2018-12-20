@@ -7,7 +7,6 @@ import FileExplorer from "./file-explorer";
 const Container = styled.div`
   display: flex;
   flex-grow: 1;
-  padding: 15px;
 `;
 
 interface Props {
@@ -17,12 +16,20 @@ interface Props {
 }
 
 const mapResultsToFiles = (results: { [filepath: string]: string }) => {
-  return Object.entries(results).map(([key, value]) => {
+  const children = Object.entries(results).map(([key, value]) => {
     return {
       name: key,
       content: value
     };
   });
+
+  return [
+    {
+      name: "root",
+      content: "",
+      children
+    }
+  ];
 };
 
 export default function EditorWithFileExplorer({

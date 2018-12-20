@@ -8,7 +8,6 @@ const Container = styled.div<{ backgroundColor: string }>`
   display: flex;
   align-items: flex-start;
   min-width: 200px;
-  padding: 10px;
   background-color: ${props => props.backgroundColor};
 `;
 
@@ -19,7 +18,7 @@ interface Props {
 export default function SideBar({ packs }: Props) {
   const {} = useContext(ThemeContext);
   return (
-    <Container backgroundColor={""}>
+    <Container backgroundColor="#29303c">
       {packs.map(pack =>
         pack.blocks.map(({ name, description }) => (
           <BlockItem key={name} name={name} description={description} />

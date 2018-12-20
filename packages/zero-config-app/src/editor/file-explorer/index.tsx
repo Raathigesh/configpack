@@ -5,9 +5,12 @@ import FileItem from "./item";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 5px;
+  padding-right: 25px;
   flex-grow: 0;
+  & > div {
+    margin-left: 0px;
+  }
 `;
 
 export interface File {

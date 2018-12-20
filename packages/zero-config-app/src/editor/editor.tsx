@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 const prettier = require("prettier/standalone");
 const parser = require("prettier/parser-babylon");
 import * as monaco from "monaco-editor";
+import theme from "./theme";
 
 const ContainerDiv = styled.div`
   display: flex;
@@ -15,26 +16,13 @@ interface Props {
 }
 
 export default class Editor extends React.Component<Props> {
-  editorRef: any;
   editor: any;
 
   componentDidMount() {
-    monaco.editor.defineTheme("myTheme", {
-      base: "vs",
-      inherit: true,
-      rules: [{ background: "EDF9FA", token: "" }],
-      colors: {
-        "editor.foreground": "#000000",
-        "editor.background": "#F2F6FA",
-        "editorCursor.foreground": "#8B0000",
-        "editor.lineHighlightBackground": "#0000FF20",
-        "editorLineNumber.foreground": "#008800",
-        "editor.selectionBackground": "#88000030",
-        "editor.inactiveSelectionBackground": "#88000015"
-      }
-    });
+    monaco.editor.defineTheme("myTheme", theme as any);
     this.editor = monaco.editor.create(this.editor, {
       value: "",
+      automaticLayout: true,
       language: "javascript",
       minimap: {
         enabled: false
@@ -51,6 +39,10 @@ export default class Editor extends React.Component<Props> {
         }
       ]
     ); */
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    this.editor.model && this.editor.model.setValue(nextProps.code);
   }
 
   componentDidUpdate() {

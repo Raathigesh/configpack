@@ -10,7 +10,6 @@ const Container = styled.div<{
   padding: 10px;
   display: flex;
   flex-direction: column;
-  border-radius: 5px;
   width: 100%;
   background: ${props => props.background};
   color: ${props => props.color};
@@ -36,7 +35,7 @@ export default function BlockItem({ name, description }: Props) {
     <Container
       border={primaryBackground}
       background={secondaryBackground}
-      color={primaryBackground}
+      color={primary}
     >
       <div>{name}</div>
       <Description size={small}>{description}</Description>
