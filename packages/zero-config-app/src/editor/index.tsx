@@ -40,8 +40,8 @@ export default function EditorWithFileExplorer({
   const mappedFiles = mapResultsToFiles(files);
   return (
     <Container>
-      <FileExplorer files={mappedFiles} onClick={setActiveFile} />
       <Editor code={files[activeFile] || ""} />
+      <FileExplorer files={mappedFiles} onClick={setActiveFile} />
     </Container>
   );
 }

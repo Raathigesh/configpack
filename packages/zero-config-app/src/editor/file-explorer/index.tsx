@@ -7,6 +7,7 @@ const Container = styled.div`
   flex-direction: column;
   padding-left: 5px;
   padding-right: 25px;
+  width: 200px;
   flex-grow: 0;
   & > div {
     margin-left: 0px;

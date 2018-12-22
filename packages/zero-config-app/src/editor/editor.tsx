@@ -5,9 +5,14 @@ const parser = require("prettier/parser-babylon");
 import * as monaco from "monaco-editor";
 import theme from "./theme";
 
-const ContainerDiv = styled.div`
+const EditorDiv = styled.div`
   display: flex;
   flex-grow: 1;
+`;
+
+const Container = styled.div`
+  display: flex;
+  width: calc(100vw - 950px);
 `;
 
 interface Props {
@@ -17,19 +22,24 @@ interface Props {
 
 export default class Editor extends React.Component<Props> {
   editor: any;
+  editorContainer: any;
 
-  componentDidMount() {
+  mountEditor = () => {
     monaco.editor.defineTheme("myTheme", theme as any);
-    this.editor = monaco.editor.create(this.editor, {
+    this.editor = monaco.editor.create(this.editorContainer, {
       value: "",
-      automaticLayout: true,
       language: "javascript",
+      fixedOverflowWidgets: true,
       minimap: {
         enabled: false
       }
     });
 
     monaco.editor.setTheme("myTheme");
+  };
+
+  componentDidMount() {
+    this.mountEditor();
     /*  this.editor.deltaDecorations(
       [],
       [
@@ -68,6 +78,10 @@ export default class Editor extends React.Component<Props> {
       plugins: [parser]
     });
 
-    return <ContainerDiv ref={ele => (this.editor = ele)} />;
+    return (
+      <Container>
+        <EditorDiv ref={ele => (this.editorContainer = ele)} />
+      </Container>
+    );
   }
 }
