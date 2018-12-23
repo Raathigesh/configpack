@@ -40,3 +40,4 @@ declare module "reflexbox" {
   export class Box extends React.Component<BoxProps> {}
 }
 declare module "use-immer";
+declare module "untag";

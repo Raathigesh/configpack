@@ -32,15 +32,29 @@ const mapResultsToFiles = (results: { [filepath: string]: string }) => {
   ];
 };
 
+export function getLanguageForExtension(extension: string) {
+  switch (extension) {
+    case "js":
+      return "javascript";
+    case "json":
+      return "json";
+    default:
+      return "";
+  }
+}
+
 export default function EditorWithFileExplorer({
   files,
   activeFile,
   setActiveFile
 }: Props) {
   const mappedFiles = mapResultsToFiles(files);
+  const extension = activeFile.split(".").pop();
+  const language = getLanguageForExtension(extension || "");
+  console.log(extension, language, activeFile);
   return (
     <Container>
-      <Editor code={files[activeFile] || ""} />
+      <Editor language={language} code={files[activeFile] || ""} />
       <FileExplorer files={mappedFiles} onClick={setActiveFile} />
     </Container>
   );

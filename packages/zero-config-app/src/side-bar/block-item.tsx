@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
+import WebpackIcon from "../webpack-icon.svg";
 import { ThemeContext } from "../theme";
 
 const Container = styled.div<{
@@ -9,14 +10,22 @@ const Container = styled.div<{
 }>`
   padding: 10px;
   display: flex;
-  flex-direction: column;
   width: 100%;
-  background: ${props => props.background};
+  border-radius: 4px;
+  cursor: pointer;
+  align-items: center;
   color: ${props => props.color};
+  &:hover {
+    background: ${props => props.background};
+  }
 `;
 
 const Description = styled.div<{ size: number }>`
   font-size: ${props => `${props.size}px`};
+`;
+
+const Details = styled.div`
+  margin-left: 10px;
 `;
 
 interface Props {
@@ -37,8 +46,11 @@ export default function BlockItem({ name, description }: Props) {
       background={secondaryBackground}
       color={primary}
     >
-      <div>{name}</div>
-      <Description size={small}>{description}</Description>
+      <WebpackIcon height="40" width="40" />
+      <Details>
+        <div>{name}</div>
+        <Description size={small}>{description}</Description>
+      </Details>
     </Container>
   );
 }

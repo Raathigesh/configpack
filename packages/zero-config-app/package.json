@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --env.development --config ./config/webpack.ui.config.js",
-    "build": "cross-env BABEL_ENV='production' NODE_OPTIONS=--max_old_space_size=8192 rimraf dist && webpack --env.production --config ./config/webpack.ui.config.js"
+    "build": "cross-env BABEL_ENV='production' NODE_OPTIONS=--max_old_space_size=8192 rimraf dist && webpack --env.production --config ./config/webpack.ui.config.js",
+    "test": "jest"
   },
   "devDependencies": {
     "@babel/core": "^7.0.1",
@@ -16,6 +17,7 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.0.0",
     "@babel/standalone": "^7.0.0",
+    "@types/jest": "^23.3.10",
     "@types/react": "^16.4.11",
     "@types/react-dom": "^16.0.7",
     "@types/styled-components": "^4.1.1",
@@ -28,6 +30,7 @@
     "html-webpack-template": "^6.2.0",
     "immer": "^1.6.0",
     "inter-ui": "^3.0.0",
+    "jest": "^23.6.0",
     "monaco-editor": "^0.14.3",
     "monaco-editor-webpack-plugin": "^1.5.1",
     "nodemon": "^1.18.3",
@@ -44,8 +47,11 @@
     "styled-components": "^4.1.1",
     "svg-inline-loader": "^0.8.0",
     "svg-react-loader": "^0.4.5",
+    "ts-jest": "^23.10.5",
     "typeface-karla": "^0.0.54",
+    "typescript": "^3.2.2",
     "uglifyjs-webpack-plugin": "^2.0.0",
+    "untag": "^1.0.1",
     "url-loader": "^1.1.1",
     "use-immer": "^0.0.5",
     "webpack": "^4.17.1",

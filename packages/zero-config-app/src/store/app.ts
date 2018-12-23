@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { EnabledBlock, BlockItem, ExtensionPack } from "../types";
 import extensionState from "./extensions";
+import { generate } from "../services/package-json.service";
 
 export function app() {
   const [enabledBlocks, setEnabledBlocks] = useState<EnabledBlock[]>([]);
@@ -24,17 +25,26 @@ export function app() {
   };
 
   const getFiles = () => {
-    return enabledBlocks.reduce((acc, block: EnabledBlock) => {
-      const extenionPack = getExtentionByKey(block.extensionKey);
-      let result = {};
-      if (extenionPack && extensionsState[block.extensionKey]) {
-        result = extenionPack.onFinalize(extensionsState[block.extensionKey]);
+    return enabledBlocks.reduce(
+      (acc, block: EnabledBlock) => {
+        const extenionPack = getExtentionByKey(block.extensionKey);
+        let result: any = {};
+        if (extenionPack && extensionsState[block.extensionKey]) {
+          result = extenionPack.onFinalize(extensionsState[block.extensionKey]);
+        }
+        return {
+          ...acc,
+          ...result.files
+        };
+      },
+      {
+        "package.json": generate(
+          enabledBlocks
+            .filter(block => block.packageJson)
+            .map(block => block.packageJson)
+        )
       }
-      return {
-        ...acc,
-        ...result
-      };
-    }, {});
+    );
   };
 
   return {

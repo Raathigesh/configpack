@@ -12,12 +12,13 @@ const EditorDiv = styled.div`
 
 const Container = styled.div`
   display: flex;
-  width: calc(100vw - 950px);
+  width: calc(100vw - 1150px);
 `;
 
 interface Props {
   code: string;
   highlights?: any[];
+  language: string;
 }
 
 export default class Editor extends React.Component<Props> {
@@ -28,7 +29,7 @@ export default class Editor extends React.Component<Props> {
     monaco.editor.defineTheme("myTheme", theme as any);
     this.editor = monaco.editor.create(this.editorContainer, {
       value: "",
-      language: "javascript",
+      language: this.props.language,
       fixedOverflowWidgets: true,
       minimap: {
         enabled: false
@@ -52,7 +53,10 @@ export default class Editor extends React.Component<Props> {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    this.editor.model && this.editor.model.setValue(nextProps.code);
+    if (this.editor.model) {
+      this.editor.model.setValue(nextProps.code);
+      monaco.editor.setModelLanguage(this.editor.model, nextProps.language);
+    }
   }
 
   componentDidUpdate() {
@@ -73,10 +77,10 @@ export default class Editor extends React.Component<Props> {
   }
 
   render() {
-    const prettyCode = prettier.format(this.props.code, {
+    /*  const prettyCode = prettier.format(this.props.code, {
       parser: "babylon",
       plugins: [parser]
-    });
+    }); */
 
     return (
       <Container>

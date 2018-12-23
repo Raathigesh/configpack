@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import styled from "styled-components";
 import { EnabledBlock } from "../types";
 
@@ -7,8 +7,19 @@ const Container = styled.div`
   background-color: #f8f8f8;
 `;
 
+const BlockContent = styled.div`
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #f4f4f4;
+`;
+
 const InnerContainer = styled.div`
   padding: 15px;
+`;
+
+const Header = styled.div``;
+const Description = styled.div`
+  font-size: 13px;
 `;
 
 interface Props {
@@ -25,18 +36,24 @@ export default function Panel({
   return (
     <Container>
       <InnerContainer>
-        {blocks.map(({ component: Component, extensionKey, name }) => {
-          const packState = extensionState[extensionKey];
-          return (
-            <Component
-              key={name}
-              state={packState}
-              onChange={(nextState: any) => {
-                onExtentionStateChange(extensionKey, nextState);
-              }}
-            />
-          );
-        })}
+        {blocks.map(
+          ({ component: Component, extensionKey, name, description }) => {
+            const packState = extensionState[extensionKey];
+            return (
+              <BlockContent>
+                <Header>{name}</Header>
+                <Description>{description}</Description>
+                <Component
+                  key={name}
+                  state={packState}
+                  onChange={(nextState: any) => {
+                    onExtentionStateChange(extensionKey, nextState);
+                  }}
+                />
+              </BlockContent>
+            );
+          }
+        )}
       </InnerContainer>
     </Container>
   );

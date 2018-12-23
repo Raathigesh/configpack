@@ -1,3 +1,4 @@
+import untag from "untag";
 import GeneralBlockComponent from "./blocks/general";
 export { default as GeneralBlockComponent } from "./blocks/general";
 
@@ -38,19 +39,37 @@ const WebpackConfigPack = {
   // builds the code by getting the state
   // state would be an object with keys as block name and value as the state
   onFinalize({ entry, output: { path, fileName }, resolve }: WebpackConfig) {
-    const webpackConfigCode = `
+    const webpackConfigCode = untag`
+      const path = require('path');
+
       module.exports = {
         entry: '${entry}',
         output: {
-          path: '${path}',
+          path: path.resolve('${path}'),
           fileName: '${fileName}'
         },
         resolve: [${resolve.map(item => `'${item}'`).join(",")}]
       };
     `;
 
+    const packageJson = {
+      scripts: {
+        start:
+          "webpack-dev-server --env.development --config ./webpack.config.js",
+        build: "webpack --env.production --config ./webpack.config.js"
+      },
+      devDependencies: {
+        webpack: "^4.17.1",
+        "webpack-cli": "^3.1.0",
+        "webpack-dev-server": "^3.1.5"
+      }
+    };
+
     return {
-      "webpack.config.js": webpackConfigCode
+      files: {
+        "webpack.config.js": webpackConfigCode
+      },
+      packageJson
     };
   }
 };

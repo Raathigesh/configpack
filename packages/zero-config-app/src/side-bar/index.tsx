@@ -7,7 +7,10 @@ import { ExtensionPack } from "../types";
 const Container = styled.div<{ backgroundColor: string }>`
   display: flex;
   align-items: flex-start;
-  min-width: 200px;
+  min-width: 300px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 20px;
   background-color: ${props => props.backgroundColor};
 `;
 
