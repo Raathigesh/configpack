@@ -1,3 +1,5 @@
+import { ColorProps, SpaceProps } from "styled-system";
+
 export interface BlockItem {
   component: any;
   name: string;
@@ -17,3 +19,5 @@ export interface EnabledBlock extends BlockItem {
   extensionKey: string;
   packageJson?: any;
 }
+
+export interface BoxProps extends ColorProps, SpaceProps {}

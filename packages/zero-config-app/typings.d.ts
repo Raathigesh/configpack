@@ -45,3 +45,4 @@ declare module "use-immer" {
     return [() => {}, state];
   }
 }
+declare module "@smooth-ui/core-sc";

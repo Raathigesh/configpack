@@ -1,58 +1,24 @@
-import React from "react";
+import { theme } from "@smooth-ui/core-sc";
 
 export interface Theme {
-  background: {
+  colors: {
     primary: string;
     secondary: string;
     tertiary: string;
   };
-  color: {
-    primary: string;
-    secondary: string;
-    tertiary: string;
-  };
-  fontWeight: {
-    bold: number;
-    normal: number;
-  };
-  fontSize: {
-    small: number;
-    medium: number;
-    larget: number;
-  };
-  padding: {
-    mini: number;
-    medium: number;
-    large: number;
-  };
+  space: number[];
+  fontSizes: number[];
 }
 
 const DefaultTheme: Theme = {
-  background: {
+  ...theme,
+  colors: {
     primary: "#0074EE",
     secondary: "#434854",
-    tertiary: "#F5F8FB"
+    tertiary: "#F5F8FB",
+    dark: "#29303c"
   },
-  color: {
-    primary: "#F5F8FB",
-    secondary: "",
-    tertiary: ""
-  },
-  fontWeight: {
-    bold: 700,
-    normal: 400
-  },
-  fontSize: {
-    small: 12,
-    medium: 15,
-    larget: 18
-  },
-  padding: {
-    mini: 5,
-    medium: 10,
-    large: 15
-  }
+  space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
+  fontSizes: [12]
 };
 export default DefaultTheme;
-
-export const ThemeContext = React.createContext(DefaultTheme);

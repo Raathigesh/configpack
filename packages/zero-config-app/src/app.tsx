@@ -1,12 +1,13 @@
-import React, { useEffect, useContext } from "react";
-import styled, { createGlobalStyle } from "styled-components";
+import React, { useEffect, useContext, useState } from "react";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import SideBar from "./side-bar";
-import defaultTheme, { ThemeContext } from "./theme";
+import defaultTheme from "./theme";
 import EditorWithFileExplorer from "./editor";
 import Panel from "./panel";
 import AddBlocksDialog from "./add-blocks-dialog";
 import { app } from "./store/app";
 import Header from "./header";
+import { ColorProps, color } from "styled-system";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -21,10 +22,11 @@ const MainContainer = styled.div`
   flex-direction: column;
 `;
 
-const ContentContainer = styled.div<{ background: string }>`
+const ContentContainer = styled.div<ColorProps>`
   display: flex;
   flex-direction: row;
   height: 100vh;
+  ${color}
 `;
 
 export default function Container() {
@@ -40,6 +42,8 @@ export default function Container() {
     setActiveFile
   } = app();
 
+  const [isDialogOpen, setDialogState] = useState(false);
+
   useEffect(() => {
     import("zero-config-webpack").then((pack: any) => {
       addExtenion(pack.default);
@@ -49,18 +53,14 @@ export default function Container() {
 
   const files = getFiles();
 
-  const {
-    background: { tertiary }
-  } = useContext(ThemeContext);
-
   return (
     <React.Fragment>
       <GlobalStyle />
-      <ThemeContext.Provider value={defaultTheme}>
+      <ThemeProvider theme={defaultTheme}>
         <MainContainer>
           <Header />
-          <ContentContainer background={tertiary}>
-            {false && <AddBlocksDialog extensionPacks={extensions} />}
+          <ContentContainer>
+            {isDialogOpen && <AddBlocksDialog extensionPacks={extensions} />}
             <SideBar packs={extensions} />
             <Panel
               blocks={enabledBlocks}
@@ -74,7 +74,7 @@ export default function Container() {
             />
           </ContentContainer>
         </MainContainer>
-      </ThemeContext.Provider>
+      </ThemeProvider>
     </React.Fragment>
   );
 }

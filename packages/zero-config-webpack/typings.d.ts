@@ -41,3 +41,7 @@ declare module "reflexbox" {
 }
 declare module "use-immer";
 declare module "untag";
+declare module "*.svg" {
+  const content: any;
+  export default content;
+}

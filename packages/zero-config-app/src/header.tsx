@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
-import { ThemeContext } from "./theme";
+import { color, space } from "styled-system";
+import { BoxProps } from "./types";
 
-const Container = styled.div<{ background: string; padding: number }>`
-  background-color: ${props => props.background};
-  padding: ${props => `${props.padding}px`};
+const Container = styled.div<BoxProps>`
+  ${color}
+  ${space}
 `;
 
 const Logo = styled.div`
@@ -14,13 +15,8 @@ const Logo = styled.div`
 `;
 
 export default function Header() {
-  const {
-    background: { primary },
-    padding: { medium }
-  } = useContext(ThemeContext);
-
   return (
-    <Container background={primary} padding={medium}>
+    <Container bg="primary" p={2}>
       <Logo>Configpack</Logo>
     </Container>
   );

@@ -1,27 +1,23 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
-import WebpackIcon from "../webpack-icon.svg";
-import { ThemeContext } from "../theme";
+import { color, fontSize, themeGet, FontSizeProps, space } from "styled-system";
+import { BoxProps } from "reflexbox";
 
-const Container = styled.div<{
-  border: string;
-  background: string;
-  color: string;
-}>`
-  padding: 10px;
+const Container = styled.div<BoxProps>`
   display: flex;
   width: 100%;
   border-radius: 4px;
   cursor: pointer;
   align-items: center;
-  color: ${props => props.color};
+  ${color}
+  ${space}
   &:hover {
-    background: ${props => props.background};
+    background: ${themeGet("colors.primary")};
   }
 `;
 
-const Description = styled.div<{ size: number }>`
-  font-size: ${props => `${props.size}px`};
+const Description = styled.div<FontSizeProps>`
+  ${fontSize}
 `;
 
 const Details = styled.div`
@@ -34,22 +30,12 @@ interface Props {
 }
 
 export default function BlockItem({ name, description }: Props) {
-  const {
-    background: { primary: primaryBackground, secondary: secondaryBackground },
-    color: { primary },
-    fontSize: { small }
-  } = useContext(ThemeContext);
-
   return (
-    <Container
-      border={primaryBackground}
-      background={secondaryBackground}
-      color={primary}
-    >
-      <WebpackIcon height="40" width="40" />
+    <Container bg="secondary" color="tertiary" p={2}>
+      {/* <WebpackIcon height="40" width="40" /> */}
       <Details>
         <div>{name}</div>
-        <Description size={small}>{description}</Description>
+        <Description fontSize={12}>{description}</Description>
       </Details>
     </Container>
   );

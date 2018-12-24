@@ -1,7 +1,9 @@
 import React, { Fragment } from "react";
+import { Button } from "@smooth-ui/core-sc";
 import styled from "styled-components";
-import { ExtensionPack } from "../app";
+import { space, SpaceProps } from "styled-system";
 import ExtenionPackComponent from "./extension-pack";
+import { ExtensionPack } from "../types";
 
 const BackDrop = styled.div`
   display: flex;
@@ -27,14 +29,28 @@ const Wrapper = styled.div`
   z-index: 9999;
 `;
 
-const Container = styled.div`
+const Container = styled.div<SpaceProps>`
   width: 950px;
   height: 800px;
   display: flex;
   position: absolute;
   background-color: white;
   align-self: center;
-  padding: 15px;
+  flex-direction: column;
+  ${space}
+`;
+
+const Header = styled.div<SpaceProps>`
+  ${space}
+`;
+const Footer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const Content = styled.div`
+  display: flex;
+  flex-grow: 1;
 `;
 
 interface Props {
@@ -46,10 +62,16 @@ export default function AddBlocksDialog({ extensionPacks }: Props) {
     <Fragment>
       <BackDrop />
       <Wrapper>
-        <Container>
-          {extensionPacks.map(extensionPack => (
-            <ExtenionPackComponent extensionPack={extensionPack} />
-          ))}
+        <Container p={15}>
+          <Header mb={2}>Add blocks to your workspace</Header>
+          <Content>
+            {extensionPacks.map(extensionPack => (
+              <ExtenionPackComponent extensionPack={extensionPack} />
+            ))}
+          </Content>
+          <Footer>
+            <Button backgroundColor="blue">Add</Button>
+          </Footer>
         </Container>
       </Wrapper>
     </Fragment>

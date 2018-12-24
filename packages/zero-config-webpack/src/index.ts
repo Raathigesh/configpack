@@ -1,4 +1,5 @@
 import untag from "untag";
+import WebpackIcon from "./webpack-icon.svg";
 import GeneralBlockComponent from "./blocks/general";
 export { default as GeneralBlockComponent } from "./blocks/general";
 
@@ -15,6 +16,7 @@ const WebpackConfigPack = {
   id: "extensions.webpack",
   displayName: "Webpack config pack",
   description: "Webpack configuration block",
+  Icon: WebpackIcon,
   blocks: [
     {
       name: "General configuration",

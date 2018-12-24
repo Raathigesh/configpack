@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { ExtensionPack } from "../app";
 import BlockItem from "./block";
+import { ExtensionPack } from "../types";
 
 const Container = styled.div`
   display: flex;
@@ -10,14 +10,18 @@ const Container = styled.div`
 
 const Header = styled.div`
   margin-bottom: 15px;
+  display: flex;
+  align-items: center;
 `;
 
 const DisplayName = styled.div`
-  font-size: 20px;
+  font-size: 16px;
+  margin-right: 10px;
 `;
 
 const Description = styled.div`
-  font-size: 14px;
+  font-size: 13px;
+  color: gray;
 `;
 
 const Blocks = styled.div``;

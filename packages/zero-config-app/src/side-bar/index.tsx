@@ -1,17 +1,17 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import BlockItem from "./block-item";
-import { ThemeContext } from "../theme";
-import { ExtensionPack } from "../types";
+import { ExtensionPack, BoxProps } from "../types";
+import { color } from "styled-system";
 
-const Container = styled.div<{ backgroundColor: string }>`
+const Container = styled.div<BoxProps>`
   display: flex;
   align-items: flex-start;
   min-width: 300px;
   padding-left: 30px;
   padding-right: 30px;
   padding-top: 20px;
-  background-color: ${props => props.backgroundColor};
+  ${color}
 `;
 
 interface Props {
@@ -19,9 +19,8 @@ interface Props {
 }
 
 export default function SideBar({ packs }: Props) {
-  const {} = useContext(ThemeContext);
   return (
-    <Container backgroundColor="#29303c">
+    <Container bg="dark">
       {packs.map(pack =>
         pack.blocks.map(({ name, description }) => (
           <BlockItem key={name} name={name} description={description} />

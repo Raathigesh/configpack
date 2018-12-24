@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { BlockItem } from "../app";
+import { BlockItem } from "../types";
 
 const Container = styled.div`
   display: flex;

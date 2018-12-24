@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { File as FileIcon, ChevronRight, ChevronDown } from "react-feather";
 import { File } from "./index";
-import { ThemeContext } from "../../theme";
+import { themeGet } from "styled-system";
 
 const Container = styled.div`
   display: flex;
@@ -16,7 +16,7 @@ const Label = styled.div`
   font-size: 13px;
 `;
 
-const ItemContainer = styled.div<{ background: string }>`
+const ItemContainer = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -24,7 +24,7 @@ const ItemContainer = styled.div<{ background: string }>`
   padding-left: 5px;
   &:hover {
     border-radius: 5px;
-    background: ${props => props.background};
+    background: ${themeGet("colors.secondary")};
   }
 `;
 const ToggleContainer = styled.div`
@@ -37,15 +37,11 @@ interface Props {
 }
 
 export default function FileItem({ file, onClick }: Props) {
-  const {
-    background: { tertiary }
-  } = useContext(ThemeContext);
-
   const [expanded, setExpanded] = useState(true);
 
   return (
     <Container>
-      <ItemContainer background={tertiary}>
+      <ItemContainer>
         <ToggleContainer>
           {!expanded && file.children && <ChevronRight size="14" />}
           {expanded && file.children && <ChevronDown size="14" />}
