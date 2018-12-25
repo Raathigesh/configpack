@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "ci": "lerna bootstrap && cd ./packages/zero-config-app && yarn build"
+    "ci": "lerna bootstrap && lerna run build --scope=zero-config-components && lerna run build --scope=zero-config-webpack && lerna run build --scope=zero-config-app"
   },
   "devDependencies": {
     "@types/node": "^10.12.12",
