@@ -47,7 +47,9 @@ export default function Container() {
   useEffect(() => {
     import("zero-config-webpack").then((pack: any) => {
       addExtenion(pack.default);
-      addBlock(pack.default.id, pack.default.blocks[0]);
+      for (const block of pack.default.blocks) {
+        addBlock(pack.default.id, block);
+      }
     });
   }, []);
 

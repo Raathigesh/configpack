@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { color, fontSize, themeGet, FontSizeProps, space } from "styled-system";
-import { BoxProps } from "reflexbox";
+import { BoxProps } from "../types";
 
 const Container = styled.div<BoxProps>`
   display: flex;
-  width: 100%;
+  width: 300px;
   border-radius: 4px;
   cursor: pointer;
   align-items: center;
@@ -31,7 +31,7 @@ interface Props {
 
 export default function BlockItem({ name, description }: Props) {
   return (
-    <Container bg="secondary" color="tertiary" p={2}>
+    <Container bg="secondary" color="tertiary" p={2} mb={2}>
       {/* <WebpackIcon height="40" width="40" /> */}
       <Details>
         <div>{name}</div>

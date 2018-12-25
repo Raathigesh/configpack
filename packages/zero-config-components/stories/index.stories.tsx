@@ -28,6 +28,12 @@ storiesOf("Button", module).add("with text", () => (
       </Section>
       <Section name="Resolve" description="Extensions to resolve">
         <RichSelect
+          defaultValue={[
+            {
+              label: "jsx",
+              value: "jsx"
+            }
+          ]}
           options={[
             {
               label: "jsx",

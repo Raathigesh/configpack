@@ -8,10 +8,15 @@ export interface Option {
 
 interface Props {
   options: Option[];
+  defaultValue: Option[];
   onChange: (value: Option[]) => void;
 }
 
-export default function RichSelect({ options = [], onChange }: Props) {
+export default function RichSelect({
+  options = [],
+  defaultValue,
+  onChange
+}: Props) {
   return (
     <Select
       styles={{
@@ -23,10 +28,24 @@ export default function RichSelect({ options = [], onChange }: Props) {
         placeholder: (base: any) => ({
           ...base,
           fontSize: "12px"
-        })
+        }),
+        option: (styles: any) => {
+          return {
+            ...styles,
+            padding: "5px",
+            fontSize: "13px"
+          };
+        },
+        multiValue: (styles: any) => {
+          return {
+            ...styles,
+            fontSize: "13px"
+          };
+        }
       }}
       isMulti
       options={options}
+      defaultValue={defaultValue}
       onChange={(value: Option[]) => onChange(value)}
     />
   );

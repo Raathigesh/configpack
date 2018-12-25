@@ -15,8 +15,8 @@ export function app() {
   } = extensionState();
 
   const addBlock = (extensionKey: string, block: BlockItem) => {
-    setEnabledBlocks([
-      ...enabledBlocks,
+    setEnabledBlocks(prevEnabledBlocks => [
+      ...prevEnabledBlocks,
       {
         ...block,
         extensionKey

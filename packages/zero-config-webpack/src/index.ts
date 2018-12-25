@@ -1,7 +1,7 @@
 import untag from "untag";
 import WebpackIcon from "./webpack-icon.svg";
-import GeneralBlockComponent from "./blocks/general";
-export { default as GeneralBlockComponent } from "./blocks/general";
+import BasicConfigBlock from "./blocks/general";
+import BabelConfigBlock from "./blocks/babel";
 
 export interface WebpackConfig {
   entry: string;
@@ -10,33 +10,37 @@ export interface WebpackConfig {
     fileName: string;
   };
   resolve: string[];
+  module: {
+    rules: {
+      babel: {
+        supportTypescript: boolean;
+      };
+    };
+  };
 }
 
 const WebpackConfigPack = {
   id: "extensions.webpack",
-  displayName: "Webpack config pack",
-  description: "Webpack configuration block",
+  displayName: "Webpack configuration pack",
+  description: "Blocks for configuring webpack",
   Icon: WebpackIcon,
-  blocks: [
-    {
-      name: "General configuration",
-      description: "Required configuration",
-      // would be provided with props
-      // Props would be
-      // - onChangeHandler() will trigger whenever the state changes
-      // - state - the state of the block. Options. Falls back to internal default state.
-      component: GeneralBlockComponent
-    }
-  ],
+  blocks: [BasicConfigBlock, BabelConfigBlock],
   getInitialState() {
     return {
-      entry: "",
+      entry: "./src/index.js",
       output: {
-        path: "",
-        fileName: ""
+        path: "./build",
+        fileName: "main.js"
       },
-      resolve: [".js"]
-    };
+      resolve: [".js", ".jsx"],
+      module: {
+        rules: {
+          babel: {
+            supportTypescript: false
+          }
+        }
+      }
+    } as WebpackConfig;
   },
   // builds the code by getting the state
   // state would be an object with keys as block name and value as the state
@@ -67,9 +71,14 @@ const WebpackConfigPack = {
       }
     };
 
+    const indexJS = untag`
+    console.log('Hello world');
+    `;
+
     return {
       files: {
-        "webpack.config.js": webpackConfigCode
+        "webpack.config.js": webpackConfigCode,
+        "src/index.js": indexJS
       },
       packageJson
     };

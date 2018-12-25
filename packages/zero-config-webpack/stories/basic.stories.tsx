@@ -26,4 +26,4 @@ function Example() {
   );
 }
 
-storiesOf("Blocks", module).add("with text", () => <Example />);
+storiesOf("Basic block", module).add("with text", () => <Example />);

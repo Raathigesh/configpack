@@ -8,3 +8,4 @@ export {
 } from "./rich-select";
 export { default as Section } from "./section";
 export { default as Row } from "./layout/row";
+export { default as Checkbox } from "./checkbox";

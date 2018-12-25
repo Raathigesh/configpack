@@ -1,19 +1,22 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
-import { EnabledBlock } from "../types";
+import { EnabledBlock, BoxProps } from "../types";
+import { space } from "styled-system";
 
 const Container = styled.div`
   display: flex;
   background-color: #f8f8f8;
 `;
 
-const BlockContent = styled.div`
-  padding: 15px;
+const BlockContent = styled.div<BoxProps>`
   border-radius: 5px;
   background-color: #f4f4f4;
+  ${space}
 `;
 
 const InnerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   padding: 15px;
 `;
 
@@ -40,7 +43,7 @@ export default function Panel({
           ({ component: Component, extensionKey, name, description }) => {
             const packState = extensionState[extensionKey];
             return (
-              <BlockContent>
+              <BlockContent p={3} mb={2}>
                 <Header>{name}</Header>
                 <Description>{description}</Description>
                 <Component
