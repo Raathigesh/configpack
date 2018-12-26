@@ -20,6 +20,23 @@ export function getScripts(fragments: PackageFragment[]) {
   return JSON.stringify(scripts);
 }
 
+export function getDependencies(
+  fragments: PackageFragment[],
+  mapper: (fragment: PackageFragment) => any
+) {
+  const scripts = fragments
+    .filter(mapper)
+    .map(mapper)
+    .reduce((acc, cur) => {
+      return {
+        ...acc,
+        ...cur
+      };
+    }, {});
+
+  return JSON.stringify(scripts);
+}
+
 export function generate(fragments: PackageFragment[]) {
   return untag`
     {
@@ -28,17 +45,14 @@ export function generate(fragments: PackageFragment[]) {
         "main": "index.js",
         "license": "MIT",
         "scripts": ${getScripts(fragments)},
-        "devDependencies": {
-          "@babel/plugin-syntax-dynamic-import": "^7.0.0",
-          "cross-env": "^5.2.0",
-          "inter-ui": "^3.0.0",
-          "nodemon": "^1.18.3",
-          "prettier": "^1.14.2",
-          "rimraf": "^2.6.2",
-          "ts-node": "^7.0.1",
-          "typescript": "^3.2.1",
-          "ws": "^6.1.2"
-        }
+        "devDependencies": ${getDependencies(
+          fragments,
+          fragment => fragment.devDependencies
+        )},
+        "dependencies": ${getDependencies(
+          fragments,
+          fragment => fragment.dependencies
+        )}
       }
     `;
 }
