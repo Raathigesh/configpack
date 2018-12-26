@@ -16,7 +16,7 @@ export interface ExtensionPack {
 }
 
 export interface EnabledBlock extends BlockItem {
-  extensionKey: string;
+  extensionId: string;
   packageJson?: any;
 }
 

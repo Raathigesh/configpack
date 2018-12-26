@@ -27,8 +27,8 @@ const Description = styled.div`
 
 interface Props {
   blocks: EnabledBlock[];
-  extensionState: { [extensionKeyl: string]: any };
-  onExtentionStateChange: (extensionKey: string, state: any) => void;
+  extensionState: { [extensionId: string]: any };
+  onExtentionStateChange: (extensionId: string, state: any) => void;
 }
 
 export default function Panel({
@@ -40,8 +40,8 @@ export default function Panel({
     <Container>
       <InnerContainer>
         {blocks.map(
-          ({ component: Component, extensionKey, name, description }) => {
-            const packState = extensionState[extensionKey];
+          ({ component: Component, extensionId, name, description }) => {
+            const packState = extensionState[extensionId];
             return (
               <BlockContent p={3} mb={2}>
                 <Header>{name}</Header>
@@ -50,7 +50,7 @@ export default function Panel({
                   key={name}
                   state={packState}
                   onChange={(nextState: any) => {
-                    onExtentionStateChange(extensionKey, nextState);
+                    onExtentionStateChange(extensionId, nextState);
                   }}
                 />
               </BlockContent>

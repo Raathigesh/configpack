@@ -3061,6 +3061,17 @@ duplexify@^3.4.2, duplexify@^3.6.0:
     readable-stream "^2.0.0"
     stream-shift "^1.0.0"
 
+easy-peasy@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/easy-peasy/-/easy-peasy-1.7.0.tgz#14a765e5965507f24fb4be6539e11cc24164f9b5"
+  integrity sha512-Rq0l4q6xaSiaSWcBFS+cbud49UUA5kcsjMzafygGKD3W/pH67Qkb/yCYICso9wy/KupEk8C4azUu/RtJy9RVBw==
+  dependencies:
+    immer "^1.7.4"
+    memoize-one "^4.0.3"
+    redux "^4.0.1"
+    redux-thunk "^2.3.0"
+    shallowequal "^1.1.0"
+
 ecc-jsbn@~0.1.1:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/ecc-jsbn/-/ecc-jsbn-0.1.2.tgz#3a83a904e54353287874c564b7549386849a98c9"
@@ -4120,6 +4131,11 @@ immer@^1.7.3:
   version "1.8.2"
   resolved "https://registry.yarnpkg.com/immer/-/immer-1.8.2.tgz#111e9c9e6832c833868f3f6481758a421f63f403"
   integrity sha512-uP9EI4hmRTlZ+d4YYmd7JMlxf8I3KPHnvWfLNjpOv/cQNRV/dKHL8L3cZ7z6OCuRQnK59Uu5LJr/KxViqAiEQQ==
+
+immer@^1.7.4:
+  version "1.9.3"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-1.9.3.tgz#e88f8cbea730d2cde0f5e7e763000a8608bccdae"
+  integrity sha512-bUyz3fOHGn82V7h4oVgJGmFglZt53JWwSyVNAT4sO0d7IovHLwLuHbh14uYKY0tewFoDcEdiQW7HuL0NsRVziw==
 
 import-lazy@^2.1.0:
   version "2.1.0"
@@ -5331,6 +5347,11 @@ memoize-one@^4.0.0:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-4.0.3.tgz#cdfdd942853f1a1b4c71c5336b8c49da0bf0273c"
   integrity sha512-QmpUu4KqDmX0plH4u+tf0riMc1KHE1+lw95cMrLlXQAFOx/xnBtwhZ52XJxd9X2O6kwKBqX32kmhbhlobD0cuw==
+
+memoize-one@^4.0.3:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-4.1.0.tgz#a2387c58c03fff27ca390c31b764a79addf3f906"
+  integrity sha512-2GApq0yI/b22J2j9rhbrAlsHb0Qcz+7yWxeLG8h+95sl1XPUgeLimQSOdur4Vw7cUhrBHwaUZxWFZueojqNRzA==
 
 memory-fs@^0.4.0, memory-fs@~0.4.1:
   version "0.4.1"
@@ -6661,6 +6682,19 @@ realpath-native@^1.0.0:
   dependencies:
     util.promisify "^1.0.0"
 
+redux-thunk@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"
+  integrity sha512-km6dclyFnmcvxhAcrQV2AkZmPQjzPDjgVlQtR0EQjxZPyJ0BnMf3in1ryuR8A2qU0HldVRfxYXbFSKlI3N7Slw==
+
+redux@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.1.tgz#436cae6cc40fbe4727689d7c8fae44808f1bfef5"
+  integrity sha512-R7bAtSkk7nY6O/OYMVR9RiBI+XghjF9rlbl5806HJbQph0LJVHZrU5oaO4q70eUKiqMRqm4y07KLTlMZ2BlVmg==
+  dependencies:
+    loose-envify "^1.4.0"
+    symbol-observable "^1.2.0"
+
 reflexbox@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/reflexbox/-/reflexbox-3.0.1.tgz#8c4876520c508d2ae743c71d4f9fb92d6ad38993"
@@ -7574,6 +7608,11 @@ svgo@^0.7.2:
     mkdirp "~0.5.1"
     sax "~1.2.1"
     whet.extend "~0.9.9"
+
+symbol-observable@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
+  integrity sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==
 
 symbol-tree@^3.2.2:
   version "3.2.2"

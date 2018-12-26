@@ -5,7 +5,7 @@ import defaultTheme from "./theme";
 import EditorWithFileExplorer from "./editor";
 import Panel from "./panel";
 import AddBlocksDialog from "./add-blocks-dialog";
-import { app } from "./store/app";
+import app from "./store";
 import Header from "./header";
 import { ColorProps, color } from "styled-system";
 
@@ -31,13 +31,13 @@ const ContentContainer = styled.div<ColorProps>`
 
 export default function Container() {
   const {
-    getFiles,
-    extensions,
-    addExtenion,
+    availableExtensions,
+    addExtension,
+    activeBlocks,
     addBlock,
-    enabledBlocks,
-    extensionsState,
-    updateExtensionState,
+    extensionState,
+    setExtensionState,
+    files,
     activeFile,
     setActiveFile
   } = app();
@@ -46,14 +46,12 @@ export default function Container() {
 
   useEffect(() => {
     import("zero-config-webpack").then((pack: any) => {
-      addExtenion(pack.default);
+      addExtension(pack.default);
       for (const block of pack.default.blocks) {
         addBlock(pack.default.id, block);
       }
     });
   }, []);
-
-  const files = getFiles();
 
   return (
     <React.Fragment>
@@ -62,15 +60,17 @@ export default function Container() {
         <MainContainer>
           <Header />
           <ContentContainer>
-            {isDialogOpen && <AddBlocksDialog extensionPacks={extensions} />}
-            <SideBar packs={extensions} />
+            {isDialogOpen && (
+              <AddBlocksDialog extensionPacks={availableExtensions} />
+            )}
+            <SideBar packs={availableExtensions} />
             <Panel
-              blocks={enabledBlocks}
-              extensionState={extensionsState}
-              onExtentionStateChange={updateExtensionState}
+              blocks={activeBlocks}
+              extensionState={extensionState}
+              onExtentionStateChange={setExtensionState}
             />
             <EditorWithFileExplorer
-              files={files}
+              files={files()}
               activeFile={activeFile}
               setActiveFile={setActiveFile}
             />

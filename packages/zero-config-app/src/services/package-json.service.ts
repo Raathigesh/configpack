@@ -16,6 +16,7 @@ export function getScripts(fragments: PackageFragment[]) {
         ...cur
       };
     }, {});
+
   return JSON.stringify(scripts);
 }
 

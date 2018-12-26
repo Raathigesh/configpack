@@ -2,6 +2,7 @@ import untag from "untag";
 import WebpackIcon from "./webpack-icon.svg";
 import BasicConfigBlock from "./blocks/general";
 import BabelConfigBlock from "./blocks/babel";
+import TypescriptConfigBlock from "./blocks/typescript";
 
 export interface WebpackConfig {
   entry: string;
@@ -24,7 +25,7 @@ const WebpackConfigPack = {
   displayName: "Webpack configuration pack",
   description: "Blocks for configuring webpack",
   Icon: WebpackIcon,
-  blocks: [BasicConfigBlock, BabelConfigBlock],
+  blocks: [BasicConfigBlock, BabelConfigBlock, TypescriptConfigBlock],
   getInitialState() {
     return {
       entry: "./src/index.js",
