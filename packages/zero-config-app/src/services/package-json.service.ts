@@ -20,7 +20,7 @@ export function getScripts(fragments: PackageFragment[]) {
   return JSON.stringify(scripts);
 }
 
-export function getDependencies(
+export function getDependencyScript(
   fragments: PackageFragment[],
   mapper: (fragment: PackageFragment) => any
 ) {
@@ -45,11 +45,11 @@ export function generate(fragments: PackageFragment[]) {
         "main": "index.js",
         "license": "MIT",
         "scripts": ${getScripts(fragments)},
-        "devDependencies": ${getDependencies(
+        "devDependencies": ${getDependencyScript(
           fragments,
           fragment => fragment.devDependencies
         )},
-        "dependencies": ${getDependencies(
+        "dependencies": ${getDependencyScript(
           fragments,
           fragment => fragment.dependencies
         )}

@@ -3,6 +3,8 @@ import WebpackIcon from "./webpack-icon.svg";
 import BasicConfigBlock from "./blocks/general";
 import BabelConfigBlock from "./blocks/babel";
 import TypescriptConfigBlock from "./blocks/typescript";
+import CSSConfigBlock from "./blocks/css";
+import FontsConfigBlock from "./blocks/fonts";
 
 export interface WebpackConfig {
   entry: string;
@@ -11,12 +13,24 @@ export interface WebpackConfig {
     fileName: string;
   };
   resolve: string[];
-  module: {
-    rules: {
-      babel: {
-        supportTypescript: boolean;
-      };
-    };
+  babel: {
+    enabled: boolean;
+  };
+  typescript: {
+    enabled: boolean;
+  };
+  css: {
+    enabled: boolean;
+    module: boolean;
+  };
+  sass: {
+    enabled: boolean;
+  };
+  fonts: {
+    enabled: boolean;
+  };
+  images: {
+    enabled: boolean;
   };
 }
 
@@ -25,7 +39,13 @@ const WebpackConfigPack = {
   displayName: "Webpack configuration pack",
   description: "Blocks for configuring webpack",
   Icon: WebpackIcon,
-  blocks: [BasicConfigBlock, BabelConfigBlock, TypescriptConfigBlock],
+  blocks: [
+    BasicConfigBlock,
+    BabelConfigBlock,
+    TypescriptConfigBlock,
+    CSSConfigBlock,
+    FontsConfigBlock
+  ],
   getInitialState() {
     return {
       entry: "./src/index.js",
@@ -34,18 +54,37 @@ const WebpackConfigPack = {
         fileName: "main.js"
       },
       resolve: [".js", ".jsx"],
-      module: {
-        rules: {
-          babel: {
-            supportTypescript: false
-          }
-        }
+      babel: {
+        enabled: true
+      },
+      typescript: {
+        enabled: true
+      },
+      css: {
+        enabled: true,
+        module: false
+      },
+      sass: {
+        enabled: true
+      },
+      fonts: {
+        enabled: true
+      },
+      images: {
+        enabled: true
       }
     } as WebpackConfig;
   },
   // builds the code by getting the state
   // state would be an object with keys as block name and value as the state
-  onFinalize({ entry, output: { path, fileName }, resolve }: WebpackConfig) {
+  onFinalize({
+    entry,
+    output: { path, fileName },
+    resolve,
+    babel,
+    css,
+    fonts
+  }: WebpackConfig) {
     const webpackConfigCode = untag`
       const path = require('path');
 
@@ -55,7 +94,32 @@ const WebpackConfigPack = {
           path: path.resolve('${path}'),
           fileName: '${fileName}'
         },
-        resolve: [${resolve.map(item => `'${item}'`).join(",")}]
+        resolve: [${resolve.map(item => `'${item}'`).join(",")}],
+        module: {
+          rules: [
+            ${babel.enabled &&
+              `{
+                test: /\.(js|jsx|ts|tsx)$/,
+                exclude: /(node_modules)/,
+                loader: "babel-loader"
+              }`}
+              ${css.enabled &&
+                `{
+                test: /\.css$/,
+                use: ["style-loader", "css-loader"]
+              }`}
+              ${fonts.enabled &&
+                `{
+                test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+                use: {
+                  loader: "url-loader",
+                  options: {
+                    limit: 50000
+                  }
+                }
+              }`}
+          ]
+        }
       };
     `;
 
@@ -68,7 +132,14 @@ const WebpackConfigPack = {
       devDependencies: {
         webpack: "^4.17.1",
         "webpack-cli": "^3.1.0",
-        "webpack-dev-server": "^3.1.5"
+        "webpack-dev-server": "^3.1.5",
+        ...(css.enabled && {
+          "style-loader": "^0.23.0",
+          "css-loader": "^1.0.0"
+        }),
+        ...(fonts.enabled && {
+          "url-loader": "^1.1.1"
+        })
       }
     };
 
